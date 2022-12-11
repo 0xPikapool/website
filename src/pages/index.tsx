@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
@@ -10,13 +10,19 @@ import styles from "./index.module.css";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
+
+  // Hack to get shake working on initial page load in built app
+  const [shake, setShake] = useState(false);
+  useEffect(() => {
+    setShake(true);
+  });
   return (
     <header className={clsx("hero hero--primary", styles.heroBanner)}>
       <div className="container">
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
-          <ShakeLittle fixed={true} fixedStop={true} freez={false}>
+          <ShakeLittle fixed={shake} fixedStop={true} freez={false}>
             <Link
               className="button button--secondary button--lg"
               to="/docs/intro"
