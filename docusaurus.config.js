@@ -107,18 +107,26 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'Get Started',
+                to: '/docs/get_started',
+              },
+              {
+                label: 'Pichu',
+                to: '/docs/pichu',
+              },
+              {
+                label: 'Pikachu',
+                to: '/docs/pikachu',
+              },
+              {
+                label: 'Raichu',
+                to: '/docs/raichu',
               },
             ],
           },
           {
             title: 'Community',
             items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
               {
                 label: 'Discord',
                 href: 'https://discordapp.com/invite/docusaurus',
@@ -138,7 +146,7 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/pikapool-eth',
               },
             ],
           },
