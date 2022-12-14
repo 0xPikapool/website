@@ -25,7 +25,7 @@ function HomepageHeader() {
           <ShakeLittle fixed={shake} fixedStop={true} freez={false}>
             <Link
               className="button button--secondary button--lg"
-              to="/docs/intro"
+              to="/docs/get_started"
             >
               {"<<catch 'em all>>"}
             </Link>

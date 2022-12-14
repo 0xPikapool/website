@@ -1,9 +1,8 @@
 
-# Introduction
+# Integration
 
 ```block
 COMING SOON; STANDBY...
-
 `;-.          ___,
   `.`\_...._/`.-"`
     \        /      ,

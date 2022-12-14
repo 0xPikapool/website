@@ -17,7 +17,7 @@ const config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'pikapool', // Usually your GitHub org/user name.
-  projectName: 'docs', // Usually your repo name.
+  projectName: 'pikapool-website', // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -33,7 +33,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
+          sidebarPath: require.resolve('./sidebars'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -70,11 +70,29 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'intro',
+            docId: 'get_started',
             position: 'left',
-            label: 'Docs',
+            label: 'Get Started ❓',
           },
-          { to: '/blog', label: 'Blog', position: 'left' },
+          {
+            type: 'doc',
+            docId: 'pichu',
+            position: 'left',
+            label: 'Pichu ✨',
+          },
+          {
+            type: 'doc',
+            docId: 'pikachu',
+            position: 'left',
+            label: 'Pikachu ⚡',
+          },
+          {
+            type: 'doc',
+            docId: 'raichu',
+            position: 'left',
+            label: 'Raichu 💥',
+          },
+          { to: '/blog', label: 'Blog 🖍️', position: 'left' },
           {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',

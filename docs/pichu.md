@@ -3,7 +3,6 @@
 
 ```block
 COMING SOON; STANDBY...
-
 `;-.          ___,
   `.`\_...._/`.-"`
     \        /      ,
