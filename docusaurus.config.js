@@ -94,7 +94,7 @@ const config = {
           },
           { to: '/blog', label: 'Blog 🖍️', position: 'left' },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/pikapool-eth',
             label: 'GitHub',
             position: 'right',
           },
@@ -129,11 +129,11 @@ const config = {
             items: [
               {
                 label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                href: 'https://discord.com/',
               },
               {
                 label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                href: 'https://twitter.com/0xpikapool',
               },
             ],
           },
@@ -151,7 +151,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Made with ❤️ by the Pikapool team`,
       },
       prism: {
         theme: lightCodeTheme,
