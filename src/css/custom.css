@@ -45,7 +45,26 @@ h1, h2, h3, .navbar__title {
   font-weight: 400;
 }
 
-.menu__link, .navbar__link {
+.menu__link, .navbar__link, .footer__title {
+  font-family: "HiMelody";
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.footer__title {
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+.breadcrumbs__link {
+  font-family: "HiMelody";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.theme-edit-this-page, .pagination-nav__sublabel, .pagination-nav__label {
   font-family: "HiMelody";
   font-size: 24px;
   font-style: normal;
