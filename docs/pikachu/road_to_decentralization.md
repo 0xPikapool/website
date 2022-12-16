@@ -1,9 +1,7 @@
-
-# Technical Specification
+# Road to Decentralization
 
 ```block
 COMING SOON; STANDBY...
-
 `;-.          ___,
   `.`\_...._/`.-"`
     \        /      ,
