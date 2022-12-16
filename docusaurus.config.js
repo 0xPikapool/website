@@ -37,14 +37,14 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/pikapool-eth/website/blob/main/',
+            'https://github.com/0xPikapool/website/blob/main/',
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/pikapool-eth/website/blob/main/',
+            'https://github.com/0xPikapool/website/blob/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -94,7 +94,7 @@ const config = {
           },
           { to: '/blog', label: 'Blog 🖍️', position: 'left' },
           {
-            href: 'https://github.com/pikapool-eth',
+            href: 'https://github.com/0xPikapool',
             label: 'GitHub',
             position: 'right',
           },
@@ -146,7 +146,7 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/pikapool-eth',
+                href: 'https://github.com/0xPikapool',
               },
             ],
           },
