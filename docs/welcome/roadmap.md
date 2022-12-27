@@ -39,4 +39,4 @@ Raichu builds on the expressitivty unleashed in Pikachu and brings these gurante
 
 ### v3 - Legendary
 
-In version 3, pikapool becomes a legendary pokemon. Its compute grows past the ability of computers and becomes reliant upon farms of shrimps hooked up to neuralink to enable infinitely scalable and trustless compute.
+WAIT, but the roadmap only goes to `v2`. Thats right anon. In version 3, pikapool becomes a legendary pokemon. Its compute grows past the ability of computers and becomes reliant upon farms of shrimps hooked up to neuralink to enable infinitely scalable and trustless compute.
