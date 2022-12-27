@@ -21,6 +21,10 @@ module.exports = {
         },
         {
           type: 'doc',
+          id: 'welcome/current-state',
+        },
+        {
+          type: 'doc',
           id: 'welcome/roadmap',
         },
       ],
