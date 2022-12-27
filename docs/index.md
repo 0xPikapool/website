@@ -1,5 +1,5 @@
 
-# Integration
+# Welcome to Pikapool
 
 ```block
 COMING SOON; STANDBY...

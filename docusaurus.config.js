@@ -70,29 +70,11 @@ const config = {
         items: [
           {
             type: 'doc',
-            docId: 'get_started',
+            docId: 'index',
             position: 'left',
-            label: 'Get Started ❓',
+            label: 'Docs ',
           },
-          {
-            type: 'doc',
-            docId: 'pichu',
-            position: 'left',
-            label: 'Pichu ✨',
-          },
-          {
-            type: 'doc',
-            docId: 'pikachu',
-            position: 'left',
-            label: 'Pikachu ⚡',
-          },
-          {
-            type: 'doc',
-            docId: 'raichu',
-            position: 'left',
-            label: 'Raichu 💥',
-          },
-          { to: '/blog', label: 'Blog 🖍️', position: 'left' },
+          { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: 'https://github.com/0xPikapool',
             label: 'GitHub',
@@ -107,20 +89,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Get Started',
-                to: '/docs/get_started',
-              },
-              {
-                label: 'Pichu',
-                to: '/docs/pichu',
-              },
-              {
-                label: 'Pikachu',
-                to: '/docs/pikachu',
-              },
-              {
-                label: 'Raichu',
-                to: '/docs/raichu',
+                label: 'Welcome',
+                to: '/docs',
               },
             ],
           },

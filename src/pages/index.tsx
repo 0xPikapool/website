@@ -23,10 +23,7 @@ function HomepageHeader() {
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <ShakeLittle fixed={shake} fixedStop={true} freez={false}>
-            <Link
-              className="button button--secondary button--lg"
-              to="/docs/get_started"
-            >
+            <Link className="button button--secondary button--lg" to="/docs">
               {"<<catch 'em all>>"}
             </Link>
           </ShakeLittle>

@@ -5,14 +5,88 @@
  - provide next/previous navigation
  */
 
-const getStarted = require("./get_started");
-const pichu = require("./pichu");
-const pikachu = require("./pikachu");
-const raichu = require("./raichu");
-
 module.exports = {
-  getStarted,
-  pichu,
-  pikachu,
-  raichu,
+  mySidebar: [
+    {
+      type: 'category',
+      label: 'Welcome',
+      items: [
+        {
+          type: 'doc',
+          id: 'index',
+        },
+        {
+          type: 'doc',
+          id: 'welcome/why-pikapool',
+        },
+        {
+          type: 'doc',
+          id: 'welcome/roadmap',
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'NFT Mint Graveyard',
+      items: [
+        {
+          type: 'doc',
+          id: 'graveyard/pokedex',
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Pikapool Auctions',
+      items: [
+        {
+          type: 'doc',
+          id: 'auctions/overview',
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'For artists',
+      items: [
+        {
+          type: 'doc',
+          id: 'artists/benefits',
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'For minters',
+      items: [
+        {
+          type: 'doc',
+          id: 'minters/benefits',
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'For builders',
+      items: [
+        {
+          type: 'doc',
+          id: 'builders/overview',
+        },
+        {
+          type: 'doc',
+          id: 'builders/rpc',
+        },
+        {
+          type: 'doc',
+          id: 'builders/sdk',
+        },
+        {
+          type: 'doc',
+          id: 'builders/react-demo',
+        },
+      ],
+    },
+  ],
+
 };
