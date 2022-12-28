@@ -2,7 +2,7 @@
 
 Pikapool can conduct auctions for any OpenZeppelin ERC721 project that enables [AccessControl](https://docs.openzeppelin.com/contracts/4.x/api/access#AccessControl) for minting.
 
-Bidders submit their auction bids as [ERC721 meta-transactions](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26) to the Pikapool darkpool, where the are ordered by tip.
+Bidders submit their auction bids as [ERC721 meta-transactions](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26) to Pikapool, where the are ordered by tip.
 
 Once the auction closes, the winning bids (those with the highest tip) are settled on-chain via the SettlementContract.
 
@@ -25,7 +25,7 @@ In Pikapool V1, while auctions are conducted by a central orchestrator it is sti
 
 The orchestrator is never able to spend user funds expect on bids that have been cryptographically signed by the user.
 
-When a bid is submitted to the darkpool, the bidder is provided a signed receipt by the orchestrator attesting that the bid was submitted and will be considered in the auction.
+When a bid is submitted to Pikapool, the bidder is provided a signed receipt by the orchestrator attesting that the bid was submitted and will be considered in the auction.
 
 When a mint is "closed for bids", the orchestrator reveals the list of bids it considered in the auction.
 

@@ -4,7 +4,7 @@
 
 Pikapool can conduct auctions for any OpenZeppelin ERC721 contract with AccessControl enabled.
 
-Bidders submit their auction bids to the Pikapool darkpool, where the are ordered by tip.
+Bidders submit their auction bids to Pikapool where the are ordered by tip.
 
 Once the auction closes, the winning bids (those with the highest tip) are settled on-chain via the SettlementContract.
 
@@ -24,7 +24,7 @@ Once the auction closes, the winning bids (those with the highest tip) are settl
 
 <div style={{display: "flex", width: "100%", justifyContent: "space-between"}}>
 <div>
-<span>Bids are submitted to the Pikapool darkpool as <a href="https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26">ERC712 meta-transactions</a>.</span>
+<span>Bids are submitted to Pikapool as <a href="https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26">ERC712 meta-transactions</a>.</span>
 
 <br/>
 <br/>
@@ -41,7 +41,7 @@ Meta-tranasctions allow Pikapool to
 
 To enable meta-transactions, users approve the SettlementContract to execute signed bids on their behalf and the NFT creator grants the SettlementContract a Minter role using OpenZeppelin [AccessControl](https://docs.openzeppelin.com/contracts/4.x/api/access#AccessControl).
 
-Now, users craft and submit bids as meta-transactions to the Pikapool darkpool.
+Now, users craft and submit bids as meta-transactions to Pikapool.
 
 When the auction closes, Pikapool gathers winning bids into bundles and submits them on-chain where the SettlementContract 1. verifies the bids are legitimate, 2. sends the tips to the NFT creator and 3. mints the NFTs to the winning addresses.
 
@@ -58,7 +58,7 @@ When the auction closes, Pikapool gathers winning bids into bundles and submits 
 
 ## Bundling
 
-On Pikachu, bids are placed off-chain and not immediately executed, but rather collected and aggregated in a darkpool to later be settled in bundles.
+On Pikachu, bids are placed off-chain and not immediately executed, but rather collected and aggregated in a private mempool to later be settled in bundles.
 
 Bundling bids allows Pikapool to be competitive in mining the bids, passing on savings to the NFT creator.
 
@@ -68,7 +68,7 @@ In Pikapool V1, while auctions are conducted by a central orchestrator they are 
 
 The orchestrator is never able to spend user funds expect on bids that have been cryptographically signed by the user.
 
-When a bid is submitted to the darkpool, the bidder is provided a signed receipt by the orchestrator attesting that the bid was submitted and will be considered in the auction.
+When a bid is submitted to Pikapool, the bidder is provided a signed receipt by the orchestrator attesting that the bid was submitted and will be considered in the auction.
 
 When a mint is "closed for bids", the orchestrator reveals the list of bids it considered in the auction.
 
