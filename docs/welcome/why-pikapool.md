@@ -1,5 +1,5 @@
 # Why Pikapool?
-Pikapool leverages meta-transactions and a synthetic gas price to order bids in a single bundle instead of leaving minters out on their own. Pikapool allows projects to align with the current minting paradigms while generating more revenue without burning participants who fail pay enough gas to win the auction. Projects can still have an Allow List and Public Mint, plus the mint price can remain static.
+Pikapool leverages meta-transactions and a synthetic gas price to order bids in a single bundle instead of leaving minters out on their own. Pikapool allows projects to align with the current minting paradigms while generating more revenue without burning participants who fail to pay enough gas to win the auction. Projects can still have an Allow List and Public Mint, plus the mint price can remain static.
 
 The end result is the same gas auction experience with the same reseller floor protection, but a portion of the gas goes back to the NFT project instead of the validator. On top of that, minters who fail to get an NFT don't need to pay the gas on the failed transaction! Instead, the transaction is just left out completely.
 
@@ -11,11 +11,11 @@ Let's use the recent GM.Studio Catharsis Public Mint as an example. As standard,
 | Public       | 226          | 226          | 0.27 ETH           | 2           |
 | Early Access | 767          | 601          | 0.001 ETH          | 1468        |
 
-Look at that public mint... 226 NFT's minted in 2 blocks with an average gas cost of 0.27 ETH per transaction! Let's clear, this is not a *bad* thing. GM.Studio has built a trustworthy brand supporting top-level artists. They've earned this response. How did this impact the average gas cost surrounding the mint though? Check out the graph below.
+Look at that public mint... 226 NFT's minted in 2 blocks with an average gas cost of 0.27 ETH per transaction! This isn't inherently a bad thing. GM.Studio has built a trustworthy brand supporting top-level artists. They've earned this response. How did this impact the average gas cost surrounding the mint though? Check out the graph below.
 
 ![Surrounding Mint](/img/catharsis-surrounding-mint.png)
 
-Damn! I bet you can guess in which blocks the mint was happening. Think this is a coincidence? Here's the same graph, but the blocks containing a mint have been removed.
+Here's the same graph, but the blocks containing a mint have been removed.
 
 ![Surrounding Mint](/img/catharsis-mint-removed.png)
 
