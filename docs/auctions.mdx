@@ -2,7 +2,7 @@
 
 ## Overview
 
-Pikapool can conduct auctions for any OpenZeppelin ERC721 contract with AccessControl.
+Pikapool can conduct auctions for any OpenZeppelin ERC721 contract with AccessControl enabled.
 
 Bidders submit their auction bids to the Pikapool darkpool, where the are ordered by tip.
 
@@ -14,27 +14,47 @@ Once the auction closes, the winning bids (those with the highest tip) are settl
 
 ## Pikapool Auction Properties
 
-- Maximises profit for creators: auction proceeds go directly to the NFT creator, rather than the Ethereum validator like in regular gas-price auctions
+- Maximises profit for creators: auction proceeds go directly to the NFT creator, rather than an Ethereum validator like in regular gas-price auctions
 
-- Gas efficient: only the successful bids with the highest tip are sent on-chain
+- Gas efficient: only successful bids with the highest tip are settled on-chain
 
 - Trustless: the Pikapool operator is bound by the rules specified in the on-chain SettlementContract, and is never able to steal funds even if were compromised or went rouge
 
 ## Meta-transactions
 
-Bids are submitted to Pikachu as [ERC712 meta-transactions](https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26).
+<div style={{display: "flex", width: "100%", justifyContent: "space-between"}}>
+<div>
+<span>Bids are submitted to the Pikapool darkpool as <a href="https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26">ERC712 meta-transactions</a>.</span>
 
-To enable meta-transactions, users approve the SettlementContract to execute signed bids on their behalf and the NFT creator grants the SettlementContract a Minter role (using OpenZeppelin [AccessControl](https://docs.openzeppelin.com/contracts/4.x/api/access#AccessControl)).
+<br/>
+<br/>
+<span>
 
-Next, users craft and submit bids as meta-transactions to the Pikapool darkpool.
+Meta-tranasctions allow Pikapool to
+
+- securely collect and organise bids off-chain
+
+- settle only winnings bids on-chain
+
+</span>
+
+
+To enable meta-transactions, users approve the SettlementContract to execute signed bids on their behalf and the NFT creator grants the SettlementContract a Minter role using OpenZeppelin [AccessControl](https://docs.openzeppelin.com/contracts/4.x/api/access#AccessControl).
+
+Now, users craft and submit bids as meta-transactions to the Pikapool darkpool.
 
 When the auction closes, Pikapool gathers winning bids into bundles and submits them on-chain where the SettlementContract 1. verifies the bids are legitimate, 2. sends the tips to the NFT creator and 3. mints the NFTs to the winning addresses.
 
-Meta-tranasctions are critical in allowing Pikapool to
+</div>
 
-- collect and organise bids off-chain
+<centered style={{ display: "flex", justifyContent: "center", marginLeft: "2px"}}>
+  <figure>
+    <img src="/img/eth_signTypedData.png" style={{maxWidth: "260px", objectFit: "contain"}} alt="hello" />
+    <figcaption>Metamask prompting a user to sign an ERC712 meta-transaction</figcaption>
+  </figure>
+</centered>
 
-- settle only winnings bids on-chain
+</div>
 
 ## Bundling
 

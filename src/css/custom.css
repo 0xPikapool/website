@@ -29,6 +29,11 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 } */
 
+figcaption {
+  font-size: 0.8em;
+  text-align: center;
+}
+
 @font-face {
   font-family: 'Cagliostro';
   src: url('/font/Cagliostro-Regular.ttf');
