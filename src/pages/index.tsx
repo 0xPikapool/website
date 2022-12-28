@@ -42,11 +42,8 @@ export default function Home(): JSX.Element {
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
-      description="the nft mempool"
+      description="the better nft mempool"
     >
-      <Head>
-        <meta property="og:image" content="img/pikapool.png" />
-      </Head>
       <HomepageHeader />
       <main>
         <HomepageFeatures />

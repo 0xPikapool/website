@@ -61,6 +61,7 @@ const config = {
         disableSwitch: false,
         respectPrefersColorScheme: false,
       },
+      image: 'img/pikapool.png',
       navbar: {
         title: 'Pikapool',
         logo: {
