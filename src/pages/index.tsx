@@ -5,7 +5,6 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import { ShakeLittle } from "reshake";
-import Head from "@docusaurus/Head";
 
 import styles from "./index.module.css";
 
