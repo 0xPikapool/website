@@ -1,17 +1,23 @@
-endi:
-  name: Endilie Yacop Sucipto
-  title: Maintainer of Docusaurus
-  url: https://github.com/endiliey
-  image_url: https://github.com/endiliey.png
+ash:
+  name: Ash Keccakum
+  title: Main Protagonist
+  url: https://github.com/ash-keccakum
+  image_url: https://github.com/ash-keccakum.png
 
-yangshun:
-  name: Yangshun Tay
-  title: Front End Engineer @ Facebook
-  url: https://github.com/yangshun
-  image_url: https://github.com/yangshun.png
+crasher:
+  name: Crasher Wake
+  title: Minister of Foreign Affairs
+  url: https://github.com/0xCrasherWake
+  image_url: https://github.com/0xCrasherWake.png
 
-slorber:
-  name: Sébastien Lorber
-  title: Docusaurus maintainer
-  url: https://sebastienlorber.com
-  image_url: https://github.com/slorber.png
+braixen:
+  name: Braixen
+  title: Head Boiler Room Mechanic
+  url: https://github.com/0xbraixen
+  image_url: https://github.com/0xbraixen.png
+
+khepri:
+  name: Khepri
+  title: Master of On-Chain Elements
+  url: https://github.com/0xkhepri
+  image_url: https://github.com/0xkhepri.png

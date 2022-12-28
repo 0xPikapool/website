@@ -61,6 +61,7 @@ const config = {
         disableSwitch: false,
         respectPrefersColorScheme: false,
       },
+      image: 'img/pikapool.png',
       navbar: {
         title: 'Pikapool',
         logo: {
@@ -81,47 +82,6 @@ const config = {
             position: 'right',
           },
         ],
-      },
-      footer: {
-        style: 'dark',
-        links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Welcome',
-                to: '/docs',
-              },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'Discord',
-                href: 'https://discord.com/',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/0xpikapool',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/0xPikapool',
-              },
-            ],
-          },
-        ],
-        copyright: `Made with ❤️ by the Pikapool team`,
       },
       prism: {
         theme: lightCodeTheme,
