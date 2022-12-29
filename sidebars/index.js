@@ -57,6 +57,10 @@ module.exports = {
           type: 'doc',
           id: 'artists/benefits',
         },
+        {
+          type: 'doc',
+          id: 'artists/requirements',
+        },
       ],
     },
     {
@@ -79,15 +83,19 @@ module.exports = {
         },
         {
           type: 'doc',
-          id: 'builders/rpc',
+          id: 'builders/grant-minter-role',
         },
         {
           type: 'doc',
-          id: 'builders/sdk',
+          id: 'builders/typescript-sdk',
         },
         {
           type: 'doc',
           id: 'builders/react-demo',
+        },
+        {
+          type: 'doc',
+          id: 'builders/rpc',
         },
       ],
     },
