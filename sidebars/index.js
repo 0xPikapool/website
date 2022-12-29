@@ -40,14 +40,9 @@ module.exports = {
       ],
     },
     {
-      type: 'category',
+      type: 'doc',
       label: 'Pikapool Auctions',
-      items: [
-        {
-          type: 'doc',
-          id: 'auctions/overview',
-        },
-      ],
+      id: 'auctions',
     },
     {
       type: 'category',

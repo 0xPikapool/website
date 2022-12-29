@@ -22,7 +22,7 @@ async function createSignAndBroadcastBid(
   // Prompt the user to sign the typed message
   const signedBid = await ethersSigner._signTypedData(unsignedBid);
 
-  // Broadcast the bid to the pikapool darkpool
+  // Broadcast the bid to pikapool
   return pikapool.bid.broadcast(signedBid);
 }
 ```

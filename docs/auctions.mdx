@@ -1,0 +1,79 @@
+# Pikapool Auctions
+
+## Overview
+
+Pikapool can conduct auctions for any OpenZeppelin ERC721 contract with AccessControl enabled.
+
+Bidders submit their auction bids to Pikapool where the are ordered by tip.
+
+Once the auction closes, the winning bids (those with the highest tip) are settled on-chain via the SettlementContract.
+
+<centered style={{ display: "flex", justifyContent: "center", width: "100%"}}>
+  <img src="/img/v1-architecture.png" style={{maxWidth: "550px"}} />
+</centered>
+
+## Pikapool Auction Properties
+
+- Maximises profit for creators: auction proceeds go directly to the NFT creator, rather than an Ethereum validator like in regular gas-price auctions
+
+- Gas efficient: only successful bids with the highest tip are settled on-chain
+
+- Trustless: the Pikapool operator is bound by the rules specified in the on-chain SettlementContract, and is never able to steal funds even if were compromised or went rouge
+
+## Meta-transactions
+
+<div style={{display: "flex", width: "100%", justifyContent: "space-between"}}>
+<div>
+<span>Bids are submitted to Pikapool as <a href="https://medium.com/metamask/eip712-is-coming-what-to-expect-and-how-to-use-it-bb92fd1a7a26">ERC712 meta-transactions</a>.</span>
+
+<br/>
+<br/>
+<span>
+
+Meta-tranasctions allow Pikapool to
+
+- securely collect and organise bids off-chain
+
+- settle only winnings bids on-chain
+
+</span>
+
+
+To enable meta-transactions, users approve the SettlementContract to execute signed bids on their behalf and the NFT creator grants the SettlementContract a Minter role using OpenZeppelin [AccessControl](https://docs.openzeppelin.com/contracts/4.x/api/access#AccessControl).
+
+Now, users craft and submit bids as meta-transactions to Pikapool.
+
+When the auction closes, Pikapool gathers winning bids into bundles and submits them on-chain where the SettlementContract 1. verifies the bids are legitimate, 2. sends the tips to the NFT creator and 3. mints the NFTs to the winning addresses.
+
+</div>
+
+<centered style={{ display: "flex", justifyContent: "center", marginLeft: "2px"}}>
+  <figure>
+    <img src="/img/eth_signTypedData.png" style={{maxWidth: "260px", objectFit: "contain"}} alt="hello" />
+    <figcaption>Metamask prompting a user to sign an ERC712 meta-transaction</figcaption>
+  </figure>
+</centered>
+
+</div>
+
+## Bundling
+
+On Pikachu, bids are placed off-chain and not immediately executed, but rather collected and aggregated in a private mempool to later be settled in bundles.
+
+Bundling bids allows Pikapool to be competitive in mining the bids, passing on savings to the NFT creator.
+
+## Trustlessness
+
+In Pikapool V1, while auctions are conducted by a central orchestrator they are still trustless to the extent that the orchestrator can never steal funds, and can never censor transactions in secret.
+
+The orchestrator is never able to spend user funds except on bids that have been cryptographically signed by the user.
+
+When a bid is submitted to Pikapool, the bidder is provided a signed receipt by the orchestrator attesting that the bid was submitted and will be considered in the auction.
+
+When a mint is "closed for bids", the orchestrator reveals the list of bids it considered in the auction.
+
+If the orchestrator misbehaved by settling transactions on-chain inconsistenly with the list of candidate bids, this could be proven by comparing the list of candidate bids with the actual on-chain settled bids.
+
+If the orchestrator misbehaved by omitting a bid from the published list of candidate bids, this could be proven by the signed receipt of the omitted bid being circulated off-chain.
+
+Pikapool is still committed to progressively decentralizing in V2 and V3 releases, drawing inspiration from [CoW Protocol](https://docs.cow.fi/overview/road-to-decentralization).
