@@ -30,14 +30,9 @@ module.exports = {
       ],
     },
     {
-      type: 'category',
-      label: 'NFT Mint Graveyard',
-      items: [
-        {
-          type: 'doc',
-          id: 'graveyard/pokedex',
-        },
-      ],
+      type: 'doc',
+      label: 'Mint Pokedex',
+      id: 'pokedex',
     },
     {
       type: 'doc',

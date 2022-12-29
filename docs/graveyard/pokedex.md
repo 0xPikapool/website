@@ -1,3 +1,0 @@
-# Pokedex
-
-Coming Soon
