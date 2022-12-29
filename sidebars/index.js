@@ -53,6 +53,10 @@ module.exports = {
           type: 'doc',
           id: 'artists/benefits',
         },
+        {
+          type: 'doc',
+          id: 'artists/requirements',
+        },
       ],
     },
     {
