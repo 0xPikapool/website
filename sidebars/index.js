@@ -30,6 +30,27 @@ module.exports = {
       ],
     },
     {
+      type: 'category',
+      label: 'Pokedex',
+      link: {
+        type: 'generated-index',
+        title: 'Welcome to the Pokedex!',
+        description: 'The Mint Pokedex is an electronic device created and designed to catalog and provide information regarding the various species of NFT mints featured on the Ethereum blockchain.',
+      },
+      items: [
+        {
+          type: 'doc',
+          id: 'pokedex/kpr',
+        },{
+          type: 'doc',
+          id: 'pokedex/otherdeed',
+        },{
+          type: 'doc',
+          id: 'pokedex/vaynersports-pass',
+        },
+      ]
+    },
+    {
       type: 'doc',
       label: 'Mint Pokedex',
       id: 'pokedex',
