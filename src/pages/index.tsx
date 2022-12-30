@@ -4,7 +4,7 @@ import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
-import { ShakeSlow } from "reshake";
+import { ShakeSlow, ShakeFast } from "reshake";
 
 import styles from "./index.module.css";
 
@@ -17,8 +17,11 @@ function HomepageHeader() {
     setShake(true);
   });
   return (
-    <header className={clsx("hero hero--primary", styles.heroBanner)}>
-      <div className="container">
+    <header
+      style={{ display: "flex", flexWrap: "wrap", gap: "32px" }}
+      className={clsx("hero hero--primary", styles.heroBanner)}
+    >
+      <div className="container" style={{ width: "auto" }}>
         <h1 className="hero__title">{siteConfig.title}</h1>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
@@ -29,8 +32,11 @@ function HomepageHeader() {
           </ShakeSlow>
         </div>
       </div>
-      <div className="container">
-        <img src={"/img/pikapool.png"} style={{ height: "300px" }} />
+      <div className="container" style={{ width: "auto" }}>
+        <img
+          src={"/img/pikapool.png"}
+          style={{ width: "440px", objectFit: "cover" }}
+        />
       </div>
     </header>
   );
