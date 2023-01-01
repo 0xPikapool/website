@@ -1,8 +1,10 @@
 # On NFT MEV
 
-TLDR; Tipping in EIP1559 is a fall back first price auction and Pikapool is a proto-Account Abstraction solution to expressing NFT bidding preferences privately.
+**TLDR; Tipping in EIP1559 is a fall back first price auction, NFT projects shouldn't need an auction expert to handle this, and Pikapool is a proto-Account Abstraction solution for expressing NFT bidding preferences privately.**
 
 ### MEV
+
+MEV as a research space and problem has been around for a couple years now, if you're unfamiliar with it check out some of these great resources [1](https://www.flashbots.net/#ec162c79202f4983a80a29b221970ec1), [2](https://arxiv.org/abs/1904.05234), [3]
 
 Gas wars have been a problem in ethereum ever since applications started getting competitive for state access. 
 
@@ -27,4 +29,5 @@ It's certainly possible, and we will continue to see smart contract advancements
 
 - resources talking about NFT auctions
 
+timber markets and how private bidding incentivizes smaller bidders.
 - http://web.mit.edu/athey/www/skewall.pdf
