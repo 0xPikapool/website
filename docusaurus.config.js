@@ -75,6 +75,7 @@ const config = {
             position: 'left',
             label: 'Docs ',
           },
+          { to: '/explorer', label: 'Explorer', position: 'left' },
           { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: 'https://github.com/0xPikapool',
