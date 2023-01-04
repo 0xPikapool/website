@@ -1,11 +1,14 @@
+import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
 import React from "react";
 import { useQuery } from "@apollo/client";
-import { GET_AUCTION } from "./queries";
+import { GET_AUCTION } from "../../queries";
 import AuctionsTable from "../../components/HomepageFeatures/auctions-table";
 import { Auction } from "@site/src/__generated__/graphql";
 import BidsTable from "@site/src/components/HomepageFeatures/bids-table";
 
 export default function AuctionPage(props: { id: string }): JSX.Element {
+  if (!ExecutionEnvironment.canUseDOM) return <p>Loading...</p>;
+
   const { loading, error, data } = useQuery(GET_AUCTION, {
     variables: { auctionId: props.id },
   });

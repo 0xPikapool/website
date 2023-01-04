@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "@theme/Layout";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  NormalizedCacheObject,
+} from "@apollo/client";
 import AuctionsPage from "./auctions";
 import AuctionPage from "./auction";
 import { useHistory } from "@docusaurus/router";
 import BidPage from "./bid";
 
-const client = new ApolloClient({
-  uri: "http://localhost:5001/graphql",
-  cache: new InMemoryCache(),
-});
-
 export default function Explorer(): JSX.Element {
   const history = useHistory();
+  const [client, setClient] =
+    useState<ApolloClient<NormalizedCacheObject> | null>(null);
+  useEffect(() => {
+    setClient(
+      new ApolloClient({
+        uri: "http://localhost:5001/graphql",
+        cache: new InMemoryCache(),
+      })
+    );
+  }, []);
+
+  if (client === null) return <p>Loading...</p>;
+
   let inner = <AuctionsPage />;
   if (history.location.search.startsWith("?auction=")) {
     const id = location.search.split("=")[1];

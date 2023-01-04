@@ -1,4 +1,4 @@
-import { gql } from "../../__generated__/gql";
+import { gql } from "./__generated__/gql";
 
 export const GET_AUCTIONS = gql(`
   query GetAuctions {

@@ -1,14 +1,15 @@
+import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { useHistory, Redirect } from "@docusaurus/router";
-import { GET_AUCTIONS } from "./queries";
+import { GET_AUCTIONS } from "../../queries";
 import AuctionsTable from "../../components/HomepageFeatures/auctions-table";
 import { Auction } from "@site/src/__generated__/graphql";
 
 export default function Auctions(): JSX.Element {
-  const history = useHistory();
-  const { loading, error, data } = useQuery(GET_AUCTIONS);
+  if (!ExecutionEnvironment.canUseDOM) return <p>Loading...</p>;
 
+  const { loading, error, data } = useQuery(GET_AUCTIONS);
   if (loading) return <p>Loading...</p>;
   if (error)
     return (
