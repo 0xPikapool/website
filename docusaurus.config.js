@@ -69,13 +69,13 @@ const config = {
           src: 'img/pikapool.png',
         },
         items: [
+          { to: '/explorer', label: 'Explorer (Alpha)', position: 'left' },
           {
             type: 'doc',
             docId: 'index',
             position: 'left',
             label: 'Docs ',
           },
-          { to: '/explorer', label: 'Explorer', position: 'left' },
           { to: '/blog', label: 'Blog', position: 'left' },
           {
             href: 'https://github.com/0xPikapool',

@@ -14,8 +14,7 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "typecheck": "tsc",
-    "postinstall": "apollo-compile"
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@apollo/client": "^3.7.3",
