@@ -10,6 +10,7 @@ import AuctionsPage from "./auctions";
 import AuctionPage from "./auction";
 import { useHistory } from "@docusaurus/router";
 import BidPage from "./bid";
+import { parseAuctionId } from "@site/src/utils";
 
 export default function Explorer(): JSX.Element {
   const history = useHistory();
@@ -29,7 +30,8 @@ export default function Explorer(): JSX.Element {
   let inner = <AuctionsPage />;
   if (history.location.search.startsWith("?auction=")) {
     const id = location.search.split("=")[1];
-    inner = <AuctionPage id={id} />;
+    const { name, address } = parseAuctionId(id);
+    inner = <AuctionPage name={name} address={address} />;
   } else if (history.location.search.startsWith("?bid=")) {
     const id = location.search.split("=")[1];
     inner = <BidPage id={id} />;

@@ -1,3 +1,4 @@
+import { useQuery } from "@apollo/client";
 import { gql } from "./__generated__/gql";
 
 export const GET_AUCTIONS = gql(`
@@ -5,13 +6,13 @@ export const GET_AUCTIONS = gql(`
     allAuctions(orderBy: BID_START_BLOCK_DESC, first: 100) {
       nodes {
         address
-        auctionId
+        name
         bidStartBlock
+        mintStartBlock
         chainId
         maxUnits
-        mintStartBlock
         price
-        bidsByAuctionId {
+        bidsByAuctionAddressAndAuctionName {
           totalCount
         }
       }
@@ -20,27 +21,27 @@ export const GET_AUCTIONS = gql(`
 `);
 
 export const GET_AUCTION = gql(`
-  query GetAuction($auctionId: String!) {
-    auctionByAuctionId(auctionId: $auctionId) {
+  query GetAuction($address: String!, $name: String!) {
+    auctionByAddressAndName(address: $address, name: $name) {
       address
-      auctionId
+      name
       price
       bidStartBlock
       mintStartBlock
       maxUnits
       chainId
-      bidsByAuctionId(first: 100, orderBy: SUBMITTED_TIMESTAMP_DESC) {
+      bidsByAuctionAddressAndAuctionName(first: 100, orderBy: SUBMITTED_TIMESTAMP_DESC) {
         nodes {
           bidId
           signer
           status
           submittedTimestamp
-          tip
-          units
+          tipRevealed
+          amount
         }
         totalCount
       }
-      bundlesByAuctionId {
+      bundlesByAuctionAddressAndAuctionName {
         nodes {
           bundleHash
           signerAddress
@@ -54,18 +55,19 @@ export const GET_AUCTION = gql(`
 export const GET_BID = gql(`
   query GetBid($bidId: String!) {
     bidByBidId(bidId: $bidId) {
-      auctionId
       bidId
+      auctionAddress
+      auctionName
       bundleHash
       replacedBy
       signer
-      signedHash
+      signature
       status
       submittedTimestamp
       statusLastUpdated
-      tip
+      tipRevealed
       txHash
-      units
+      amount
     }
   }
 `);

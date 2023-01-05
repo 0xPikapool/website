@@ -9,17 +9,17 @@ type Auction implements Node {
   A globally unique identifier. Can be used in various places throughout the system to identify this single value.
   """
   nodeId: ID!
-  auctionId: String!
   address: String!
-  bidStartBlock: BigInt!
-  mintStartBlock: BigInt!
-  price: Int!
-  maxUnits: Int!
-  chainId: Int!
+  name: String!
+  bidStartBlock: BigFloat!
+  mintStartBlock: BigFloat!
+  price: BigFloat!
+  maxUnits: BigFloat!
+  chainId: BigFloat!
   lastUpdated: Datetime!
 
   """Reads and enables pagination through a set of `Bid`."""
-  bidsByAuctionId(
+  bidsByAuctionAddressAndAuctionName(
     """Only read the first `n` values of the set."""
     first: Int
 
@@ -48,7 +48,7 @@ type Auction implements Node {
   ): BidsConnection!
 
   """Reads and enables pagination through a set of `Bundle`."""
-  bundlesByAuctionId(
+  bundlesByAuctionAddressAndAuctionName(
     """Only read the first `n` values of the set."""
     first: Int
 
@@ -81,26 +81,26 @@ type Auction implements Node {
 A condition to be used against `Auction` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input AuctionCondition {
-  """Checks for equality with the object’s `auctionId` field."""
-  auctionId: String
-
   """Checks for equality with the object’s `address` field."""
   address: String
 
+  """Checks for equality with the object’s `name` field."""
+  name: String
+
   """Checks for equality with the object’s `bidStartBlock` field."""
-  bidStartBlock: BigInt
+  bidStartBlock: BigFloat
 
   """Checks for equality with the object’s `mintStartBlock` field."""
-  mintStartBlock: BigInt
+  mintStartBlock: BigFloat
 
   """Checks for equality with the object’s `price` field."""
-  price: Int
+  price: BigFloat
 
   """Checks for equality with the object’s `maxUnits` field."""
-  maxUnits: Int
+  maxUnits: BigFloat
 
   """Checks for equality with the object’s `chainId` field."""
-  chainId: Int
+  chainId: BigFloat
 
   """Checks for equality with the object’s `lastUpdated` field."""
   lastUpdated: Datetime
@@ -108,13 +108,13 @@ input AuctionCondition {
 
 """An input for mutations affecting `Auction`"""
 input AuctionInput {
-  auctionId: String!
   address: String!
-  bidStartBlock: BigInt!
-  mintStartBlock: BigInt!
-  price: Int!
-  maxUnits: Int!
-  chainId: Int!
+  name: String!
+  bidStartBlock: BigFloat!
+  mintStartBlock: BigFloat!
+  price: BigFloat!
+  maxUnits: BigFloat!
+  chainId: BigFloat!
   lastUpdated: Datetime!
 }
 
@@ -122,13 +122,13 @@ input AuctionInput {
 Represents an update to a `Auction`. Fields that are set will be updated.
 """
 input AuctionPatch {
-  auctionId: String
   address: String
-  bidStartBlock: BigInt
-  mintStartBlock: BigInt
-  price: Int
-  maxUnits: Int
-  chainId: Int
+  name: String
+  bidStartBlock: BigFloat
+  mintStartBlock: BigFloat
+  price: BigFloat
+  maxUnits: BigFloat
+  chainId: BigFloat
   lastUpdated: Datetime
 }
 
@@ -161,10 +161,10 @@ type AuctionsEdge {
 """Methods to use when ordering `Auction`."""
 enum AuctionsOrderBy {
   NATURAL
-  AUCTION_ID_ASC
-  AUCTION_ID_DESC
   ADDRESS_ASC
   ADDRESS_DESC
+  NAME_ASC
+  NAME_DESC
   BID_START_BLOCK_ASC
   BID_START_BLOCK_DESC
   MINT_START_BLOCK_ASC
@@ -186,21 +186,23 @@ type Bid implements Node {
   A globally unique identifier. Can be used in various places throughout the system to identify this single value.
   """
   nodeId: ID!
-  auctionId: String
+  bidId: String!
+  auctionAddress: String!
+  auctionName: String!
   bundleHash: String
   txHash: String
-  bidId: String!
   signer: String!
-  units: Int!
-  tip: Int!
+  amount: BigFloat!
+  tipHidden: BigFloat!
+  tipRevealed: BigFloat
   status: BidStatus!
   submittedTimestamp: Datetime!
   statusLastUpdated: Datetime!
-  signedHash: String!
+  signature: String!
   replacedBy: String
 
   """Reads a single `Auction` that is related to this `Bid`."""
-  auctionByAuctionId: Auction
+  auctionByAuctionAddressAndAuctionName: Auction
 
   """Reads a single `Bundle` that is related to this `Bid`."""
   bundleByBundleHash: Bundle
@@ -242,8 +244,14 @@ type Bid implements Node {
 A condition to be used against `Bid` object types. All fields are tested for equality and combined with a logical ‘and.’
 """
 input BidCondition {
-  """Checks for equality with the object’s `auctionId` field."""
-  auctionId: String
+  """Checks for equality with the object’s `bidId` field."""
+  bidId: String
+
+  """Checks for equality with the object’s `auctionAddress` field."""
+  auctionAddress: String
+
+  """Checks for equality with the object’s `auctionName` field."""
+  auctionName: String
 
   """Checks for equality with the object’s `bundleHash` field."""
   bundleHash: String
@@ -251,17 +259,17 @@ input BidCondition {
   """Checks for equality with the object’s `txHash` field."""
   txHash: String
 
-  """Checks for equality with the object’s `bidId` field."""
-  bidId: String
-
   """Checks for equality with the object’s `signer` field."""
   signer: String
 
-  """Checks for equality with the object’s `units` field."""
-  units: Int
+  """Checks for equality with the object’s `amount` field."""
+  amount: BigFloat
 
-  """Checks for equality with the object’s `tip` field."""
-  tip: Int
+  """Checks for equality with the object’s `tipHidden` field."""
+  tipHidden: BigFloat
+
+  """Checks for equality with the object’s `tipRevealed` field."""
+  tipRevealed: BigFloat
 
   """Checks for equality with the object’s `status` field."""
   status: BidStatus
@@ -272,8 +280,8 @@ input BidCondition {
   """Checks for equality with the object’s `statusLastUpdated` field."""
   statusLastUpdated: Datetime
 
-  """Checks for equality with the object’s `signedHash` field."""
-  signedHash: String
+  """Checks for equality with the object’s `signature` field."""
+  signature: String
 
   """Checks for equality with the object’s `replacedBy` field."""
   replacedBy: String
@@ -281,33 +289,37 @@ input BidCondition {
 
 """An input for mutations affecting `Bid`"""
 input BidInput {
-  auctionId: String
+  bidId: String!
+  auctionAddress: String!
+  auctionName: String!
   bundleHash: String
   txHash: String
-  bidId: String!
   signer: String!
-  units: Int!
-  tip: Int!
+  amount: BigFloat!
+  tipHidden: BigFloat!
+  tipRevealed: BigFloat
   status: BidStatus!
   submittedTimestamp: Datetime!
   statusLastUpdated: Datetime!
-  signedHash: String!
+  signature: String!
   replacedBy: String
 }
 
 """Represents an update to a `Bid`. Fields that are set will be updated."""
 input BidPatch {
-  auctionId: String
+  bidId: String
+  auctionAddress: String
+  auctionName: String
   bundleHash: String
   txHash: String
-  bidId: String
   signer: String
-  units: Int
-  tip: Int
+  amount: BigFloat
+  tipHidden: BigFloat
+  tipRevealed: BigFloat
   status: BidStatus
   submittedTimestamp: Datetime
   statusLastUpdated: Datetime
-  signedHash: String
+  signature: String
   replacedBy: String
 }
 
@@ -340,28 +352,32 @@ type BidsEdge {
 """Methods to use when ordering `Bid`."""
 enum BidsOrderBy {
   NATURAL
-  AUCTION_ID_ASC
-  AUCTION_ID_DESC
+  BID_ID_ASC
+  BID_ID_DESC
+  AUCTION_ADDRESS_ASC
+  AUCTION_ADDRESS_DESC
+  AUCTION_NAME_ASC
+  AUCTION_NAME_DESC
   BUNDLE_HASH_ASC
   BUNDLE_HASH_DESC
   TX_HASH_ASC
   TX_HASH_DESC
-  BID_ID_ASC
-  BID_ID_DESC
   SIGNER_ASC
   SIGNER_DESC
-  UNITS_ASC
-  UNITS_DESC
-  TIP_ASC
-  TIP_DESC
+  AMOUNT_ASC
+  AMOUNT_DESC
+  TIP_HIDDEN_ASC
+  TIP_HIDDEN_DESC
+  TIP_REVEALED_ASC
+  TIP_REVEALED_DESC
   STATUS_ASC
   STATUS_DESC
   SUBMITTED_TIMESTAMP_ASC
   SUBMITTED_TIMESTAMP_DESC
   STATUS_LAST_UPDATED_ASC
   STATUS_LAST_UPDATED_DESC
-  SIGNED_HASH_ASC
-  SIGNED_HASH_DESC
+  SIGNATURE_ASC
+  SIGNATURE_DESC
   REPLACED_BY_ASC
   REPLACED_BY_DESC
   PRIMARY_KEY_ASC
@@ -376,11 +392,9 @@ enum BidStatus {
 }
 
 """
-A signed eight-byte integer. The upper big integer values are greater than the
-max value for a JavaScript number. Therefore all big integers will be output as
-strings and not numbers.
+A floating point number that requires more precision than IEEE 754 binary 64
 """
-scalar BigInt
+scalar BigFloat
 
 type Bundle implements Node {
   """
@@ -388,11 +402,13 @@ type Bundle implements Node {
   """
   nodeId: ID!
   bundleHash: String!
+  blockNumber: BigFloat!
   signerAddress: String!
-  auctionId: String
+  auctionAddress: String!
+  auctionName: String!
 
   """Reads a single `Auction` that is related to this `Bundle`."""
-  auctionByAuctionId: Auction
+  auctionByAuctionAddressAndAuctionName: Auction
 
   """Reads and enables pagination through a set of `Bid`."""
   bidsByBundleHash(
@@ -431,18 +447,26 @@ input BundleCondition {
   """Checks for equality with the object’s `bundleHash` field."""
   bundleHash: String
 
+  """Checks for equality with the object’s `blockNumber` field."""
+  blockNumber: BigFloat
+
   """Checks for equality with the object’s `signerAddress` field."""
   signerAddress: String
 
-  """Checks for equality with the object’s `auctionId` field."""
-  auctionId: String
+  """Checks for equality with the object’s `auctionAddress` field."""
+  auctionAddress: String
+
+  """Checks for equality with the object’s `auctionName` field."""
+  auctionName: String
 }
 
 """An input for mutations affecting `Bundle`"""
 input BundleInput {
   bundleHash: String!
+  blockNumber: BigFloat!
   signerAddress: String!
-  auctionId: String
+  auctionAddress: String!
+  auctionName: String!
 }
 
 """
@@ -450,8 +474,10 @@ Represents an update to a `Bundle`. Fields that are set will be updated.
 """
 input BundlePatch {
   bundleHash: String
+  blockNumber: BigFloat
   signerAddress: String
-  auctionId: String
+  auctionAddress: String
+  auctionName: String
 }
 
 """A connection to a list of `Bundle` values."""
@@ -485,10 +511,14 @@ enum BundlesOrderBy {
   NATURAL
   BUNDLE_HASH_ASC
   BUNDLE_HASH_DESC
+  BLOCK_NUMBER_ASC
+  BLOCK_NUMBER_DESC
   SIGNER_ADDRESS_ASC
   SIGNER_ADDRESS_DESC
-  AUCTION_ID_ASC
-  AUCTION_ID_DESC
+  AUCTION_ADDRESS_ASC
+  AUCTION_ADDRESS_DESC
+  AUCTION_NAME_ASC
+  AUCTION_NAME_DESC
   PRIMARY_KEY_ASC
   PRIMARY_KEY_DESC
 }
@@ -557,7 +587,7 @@ type CreateBidPayload {
   query: Query
 
   """Reads a single `Auction` that is related to this `Bid`."""
-  auctionByAuctionId: Auction
+  auctionByAuctionAddressAndAuctionName: Auction
 
   """Reads a single `Bundle` that is related to this `Bid`."""
   bundleByBundleHash: Bundle
@@ -601,7 +631,7 @@ type CreateBundlePayload {
   query: Query
 
   """Reads a single `Auction` that is related to this `Bundle`."""
-  auctionByAuctionId: Auction
+  auctionByAuctionAddressAndAuctionName: Auction
 
   """An edge for our `Bundle`. May be used by Relay 1."""
   bundleEdge(
@@ -619,14 +649,15 @@ A point in time as described by the [ISO
 """
 scalar Datetime
 
-"""All input for the `deleteAuctionByAuctionId` mutation."""
-input DeleteAuctionByAuctionIdInput {
+"""All input for the `deleteAuctionByAddressAndName` mutation."""
+input DeleteAuctionByAddressAndNameInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
   payload verbatim. May be used to track mutations by the client.
   """
   clientMutationId: String
-  auctionId: String!
+  address: String!
+  name: String!
 }
 
 """All input for the `deleteAuction` mutation."""
@@ -709,7 +740,7 @@ type DeleteBidPayload {
   query: Query
 
   """Reads a single `Auction` that is related to this `Bid`."""
-  auctionByAuctionId: Auction
+  auctionByAuctionAddressAndAuctionName: Auction
 
   """Reads a single `Bundle` that is related to this `Bid`."""
   bundleByBundleHash: Bundle
@@ -766,7 +797,7 @@ type DeleteBundlePayload {
   query: Query
 
   """Reads a single `Auction` that is related to this `Bundle`."""
-  auctionByAuctionId: Auction
+  auctionByAuctionAddressAndAuctionName: Auction
 
   """An edge for our `Bundle`. May be used by Relay 1."""
   bundleEdge(
@@ -821,11 +852,11 @@ type Mutation {
   ): UpdateAuctionPayload
 
   """Updates a single `Auction` using a unique key and a patch."""
-  updateAuctionByAuctionId(
+  updateAuctionByAddressAndName(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: UpdateAuctionByAuctionIdInput!
+    input: UpdateAuctionByAddressAndNameInput!
   ): UpdateAuctionPayload
 
   """Updates a single `Bid` using its globally unique id and a patch."""
@@ -869,11 +900,11 @@ type Mutation {
   ): DeleteAuctionPayload
 
   """Deletes a single `Auction` using a unique key."""
-  deleteAuctionByAuctionId(
+  deleteAuctionByAddressAndName(
     """
     The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
     """
-    input: DeleteAuctionByAuctionIdInput!
+    input: DeleteAuctionByAddressAndNameInput!
   ): DeleteAuctionPayload
 
   """Deletes a single `Bid` using its globally unique id."""
@@ -1037,7 +1068,7 @@ type Query implements Node {
     """
     condition: BundleCondition
   ): BundlesConnection
-  auctionByAuctionId(auctionId: String!): Auction
+  auctionByAddressAndName(address: String!, name: String!): Auction
   bidByBidId(bidId: String!): Bid
   bundleByBundleHash(bundleHash: String!): Bundle
 
@@ -1067,8 +1098,8 @@ type Subscription {
   listen(topic: String!): ListenPayload!
 }
 
-"""All input for the `updateAuctionByAuctionId` mutation."""
-input UpdateAuctionByAuctionIdInput {
+"""All input for the `updateAuctionByAddressAndName` mutation."""
+input UpdateAuctionByAddressAndNameInput {
   """
   An arbitrary string value with no semantic meaning. Will be included in the
   payload verbatim. May be used to track mutations by the client.
@@ -1079,7 +1110,8 @@ input UpdateAuctionByAuctionIdInput {
   An object where the defined keys will be set on the `Auction` being updated.
   """
   auctionPatch: AuctionPatch!
-  auctionId: String!
+  address: String!
+  name: String!
 }
 
 """All input for the `updateAuction` mutation."""
@@ -1175,7 +1207,7 @@ type UpdateBidPayload {
   query: Query
 
   """Reads a single `Auction` that is related to this `Bid`."""
-  auctionByAuctionId: Auction
+  auctionByAuctionAddressAndAuctionName: Auction
 
   """Reads a single `Bundle` that is related to this `Bid`."""
   bundleByBundleHash: Bundle
@@ -1241,7 +1273,7 @@ type UpdateBundlePayload {
   query: Query
 
   """Reads a single `Auction` that is related to this `Bundle`."""
-  auctionByAuctionId: Auction
+  auctionByAuctionAddressAndAuctionName: Auction
 
   """An edge for our `Bundle`. May be used by Relay 1."""
   bundleEdge(

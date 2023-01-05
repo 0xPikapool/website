@@ -2,6 +2,7 @@ import React from "react";
 import { Auction } from "@site/src/__generated__/graphql";
 import Link from "@docusaurus/Link";
 import { useHistory } from "@docusaurus/router";
+import { getAuctionId, hexBufferToString } from "@site/src/utils";
 
 export default function AuctionsTable(props: {
   auctions: Auction[];
@@ -25,23 +26,23 @@ export default function AuctionsTable(props: {
         </thead>
         <tbody>
           {props.auctions.map((auction) => {
+            const auctionAddressStr = hexBufferToString(auction.address);
+            const id = getAuctionId(auctionAddressStr, auction.name);
             const truncatedAddress =
-              auction.address.slice(0, 6) + "..." + auction.address.slice(-4);
-            const etherscanUrl = `https://etherscan.io/address/${auction.address}`;
+              auctionAddressStr.slice(0, 6) +
+              "..." +
+              auctionAddressStr.slice(-4);
+            const etherscanUrl = `https://etherscan.io/address/${auctionAddressStr}`;
             return (
-              <tr key={auction.auctionId}>
+              <tr key={id}>
                 <td>
-                  {
-                    <Link to={`/explorer?auction=${auction.auctionId}`}>
-                      Test-Auction
-                    </Link>
-                  }
+                  {<Link to={`/explorer?auction=${id}`}>Test-Auction</Link>}
                 </td>
                 <td>{auction.maxUnits}</td>
                 <td>{auction.price} WETH</td>
                 <td>{auction.bidStartBlock}</td>
                 <td>{auction.mintStartBlock}</td>
-                <td>{auction.bidsByAuctionId.totalCount}</td>
+                <td>{auction.bidsByAuctionAddressAndAuctionName.totalCount}</td>
                 <td>Bidding Open!</td>
                 <td>
                   {
