@@ -68,6 +68,9 @@ export const GET_BID = gql(`
       tipRevealed
       txHash
       amount
+      auctionByAuctionAddressAndAuctionName {
+        price
+      }
     }
   }
 `);

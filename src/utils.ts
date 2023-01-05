@@ -1,3 +1,4 @@
+import { utils } from "ethers";
 const Buffer = require("buffer/").Buffer;
 
 export function hexBufferToString(hexBuffer: string) {
@@ -17,4 +18,8 @@ export function parseAuctionId(auctionId: string) {
   const name = auctionId.substring(44);
   console.log({ name, address });
   return { name, address };
+}
+
+export function displayEth(amount: string) {
+  return "Ξ" + utils.formatEther(amount);
 }

@@ -3,7 +3,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { GET_BID } from "../../queries";
 import { Bid } from "@site/src/__generated__/graphql";
-import BidsTable from "@site/src/components/HomepageFeatures/bids-table";
+import BidVerbose from "@site/src/components/bid-verbose";
 import { stringToHexBuffer } from "@site/src/utils";
 
 export default function BidPage(props: { id: string }): JSX.Element {
@@ -24,8 +24,8 @@ export default function BidPage(props: { id: string }): JSX.Element {
   const bid = data.bidByBidId as Bid;
   return (
     <>
-      <div className="hero__subtitle">{`Bid ${bid.bidId}`}</div>
-      <BidsTable bids={[bid]} verbose={true} />
+      <div className="hero__subtitle">{`Bid ${props.id}`}</div>
+      <BidVerbose bid={bid} />
     </>
   );
 }

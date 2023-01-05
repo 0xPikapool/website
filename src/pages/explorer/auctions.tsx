@@ -3,7 +3,7 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { useHistory, Redirect } from "@docusaurus/router";
 import { GET_AUCTIONS } from "../../queries";
-import AuctionsTable from "../../components/HomepageFeatures/auctions-table";
+import AuctionsTable from "../../components/auctions-table";
 import { Auction } from "@site/src/__generated__/graphql";
 
 export default function Auctions(): JSX.Element {

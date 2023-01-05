@@ -2,9 +2,9 @@ import ExecutionEnvironment from "@docusaurus/ExecutionEnvironment";
 import React from "react";
 import { useQuery } from "@apollo/client";
 import { GET_AUCTION } from "../../queries";
-import AuctionsTable from "../../components/HomepageFeatures/auctions-table";
+import AuctionsTable from "../../components/auctions-table";
 import { Auction } from "@site/src/__generated__/graphql";
-import BidsTable from "@site/src/components/HomepageFeatures/bids-table";
+import BidsTable from "@site/src/components/bids-table";
 import { stringToHexBuffer } from "@site/src/utils";
 
 export default function AuctionPage(props: {

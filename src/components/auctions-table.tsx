@@ -2,7 +2,7 @@ import React from "react";
 import { Auction } from "@site/src/__generated__/graphql";
 import Link from "@docusaurus/Link";
 import { useHistory } from "@docusaurus/router";
-import { getAuctionId, hexBufferToString } from "@site/src/utils";
+import { displayEth, getAuctionId, hexBufferToString } from "@site/src/utils";
 
 export default function AuctionsTable(props: {
   auctions: Auction[];
@@ -36,10 +36,10 @@ export default function AuctionsTable(props: {
             return (
               <tr key={id}>
                 <td>
-                  {<Link to={`/explorer?auction=${id}`}>Test-Auction</Link>}
+                  {<Link to={`/explorer?auction=${id}`}>{auction.name}</Link>}
                 </td>
                 <td>{auction.maxUnits}</td>
-                <td>{auction.price} WETH</td>
+                <td>{displayEth(auction.price)}</td>
                 <td>{auction.bidStartBlock}</td>
                 <td>{auction.mintStartBlock}</td>
                 <td>{auction.bidsByAuctionAddressAndAuctionName.totalCount}</td>

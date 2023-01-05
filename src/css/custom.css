@@ -82,3 +82,7 @@ h1, h2, h3, .navbar__title {
   font-style: normal;
   font-weight: 400;
 }
+
+#myTable {
+  transform: rotate(270deg);
+}
