@@ -9,7 +9,9 @@ import { Auction } from "@site/src/__generated__/graphql";
 export default function Auctions(): JSX.Element {
   if (!ExecutionEnvironment.canUseDOM) return <p>Loading...</p>;
 
-  const { loading, error, data } = useQuery(GET_AUCTIONS);
+  const { loading, error, data } = useQuery(GET_AUCTIONS, {
+    pollInterval: 1000,
+  });
   if (loading) return <p>Loading...</p>;
   if (error)
     return (

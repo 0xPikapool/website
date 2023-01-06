@@ -11,7 +11,18 @@ export default function BidPage(props: { id: string }): JSX.Element {
 
   const { loading, error, data } = useQuery(GET_BID, {
     variables: { bidId: stringToHexBuffer(props.id) },
+    pollInterval: 1000,
   });
+  if (data) {
+    const bid = data.bidByBidId as Bid;
+    return (
+      <>
+        <div className="hero__subtitle">{`Bid ${props.id}`}</div>
+        <BidVerbose bid={bid} />
+      </>
+    );
+  }
+
   if (loading) return <p>Loading...</p>;
   if (error)
     return (
@@ -20,12 +31,4 @@ export default function BidPage(props: { id: string }): JSX.Element {
         <p>{JSON.stringify(error)}</p>
       </>
     );
-
-  const bid = data.bidByBidId as Bid;
-  return (
-    <>
-      <div className="hero__subtitle">{`Bid ${props.id}`}</div>
-      <BidVerbose bid={bid} />
-    </>
-  );
 }

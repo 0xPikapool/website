@@ -6,7 +6,6 @@ import { displayEth, getAuctionId, hexBufferToString } from "../utils";
 export default function BidVerbose(props: { bid: Bid }): JSX.Element {
   const { bid } = props;
   const basePrice = bid.auctionByAuctionAddressAndAuctionName.price;
-  const idStr = hexBufferToString(bid.bidId);
   const signerStr = hexBufferToString(bid.signer);
   const auctionAddressStr = hexBufferToString(bid.auctionAddress);
   const auctionUrl = `/explorer?auction=${getAuctionId(
@@ -16,10 +15,6 @@ export default function BidVerbose(props: { bid: Bid }): JSX.Element {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <table align="left">
-        <tr>
-          <th>ID</th>
-          <td>{idStr}</td>
-        </tr>
         <tr>
           <th>Submitted</th>
           <td>{bid.submittedTimestamp}</td>

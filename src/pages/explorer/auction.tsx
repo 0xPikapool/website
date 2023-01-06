@@ -15,7 +15,21 @@ export default function AuctionPage(props: {
 
   const { loading, error, data } = useQuery(GET_AUCTION, {
     variables: { name: props.name, address: stringToHexBuffer(props.address) },
+    pollInterval: 1000,
   });
+  if (data) {
+    const auction = data.auctionByAddressAndName as Auction;
+    const bids = auction.bidsByAuctionAddressAndAuctionName.nodes;
+    return (
+      <>
+        <div className="hero__subtitle">{`Auction`}</div>
+        <AuctionsTable auctions={[auction]} />
+        <div className="hero__subtitle">{`Latest 100 Bids`}</div>
+        <BidsTable bids={bids} verbose={false} />
+      </>
+    );
+  }
+
   if (loading) return <p>Loading...</p>;
   if (error)
     return (
@@ -24,15 +38,4 @@ export default function AuctionPage(props: {
         <p>{JSON.stringify(error)}</p>
       </>
     );
-
-  const auction = data.auctionByAddressAndName as Auction;
-  const bids = auction.bidsByAuctionAddressAndAuctionName.nodes;
-  return (
-    <>
-      <div className="hero__subtitle">{`Auction`}</div>
-      <AuctionsTable auctions={[auction]} />
-      <div className="hero__subtitle">{`Latest 100 Bids`}</div>
-      <BidsTable bids={bids} verbose={false} />
-    </>
-  );
 }

@@ -1,16 +1,27 @@
 import React, { useEffect, useState } from "react";
 import Layout from "@theme/Layout";
+import { usePregeneratedHashes as withPregeneratedHashes } from "graphql-codegen-persisted-query-ids/lib/apollo";
+import { createPersistedQueryLink } from "@apollo/client/link/persisted-queries";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   NormalizedCacheObject,
+  ApolloLink,
+  HttpLink,
 } from "@apollo/client";
 import AuctionsPage from "./auctions";
 import AuctionPage from "./auction";
 import { useHistory } from "@docusaurus/router";
 import BidPage from "./bid";
 import { parseAuctionId } from "@site/src/utils";
+
+const hashes = require("../../__generated__/client.json");
+const persistedLink = createPersistedQueryLink({
+  useGETForHashedQueries: false,
+  generateHash: withPregeneratedHashes(hashes),
+  disable: () => false,
+});
 
 export default function Explorer(): JSX.Element {
   const history = useHistory();
@@ -19,7 +30,10 @@ export default function Explorer(): JSX.Element {
   useEffect(() => {
     setClient(
       new ApolloClient({
-        uri: "http://localhost:5001/graphql",
+        link: ApolloLink.from([
+          persistedLink,
+          new HttpLink({ uri: "http://54.221.131.24:5500/graphql" }),
+        ]),
         cache: new InMemoryCache(),
       })
     );

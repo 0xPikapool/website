@@ -16,7 +16,6 @@ export function getAuctionId(address: string, name: string): string {
 export function parseAuctionId(auctionId: string) {
   const address = auctionId.substring(0, 42);
   const name = auctionId.substring(44);
-  console.log({ name, address });
   return { name, address };
 }
 
