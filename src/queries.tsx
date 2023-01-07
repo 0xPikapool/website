@@ -74,3 +74,9 @@ export const GET_BID = gql(`
     }
   }
 `);
+
+export const HEALTH_CHECK = gql(`
+  query HealthCheck {
+    __typename
+  }
+`);
