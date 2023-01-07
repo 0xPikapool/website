@@ -3,10 +3,7 @@ import { Bid } from "@site/src/__generated__/graphql";
 import Link from "@docusaurus/Link";
 import { displayEth, hexBufferToString } from "@site/src/utils";
 
-export default function BidsTable(props: {
-  bids: Bid[];
-  verbose: boolean;
-}): JSX.Element {
+export default function BidsTable(props: { bids: Bid[] }): JSX.Element {
   return (
     <>
       <table>
@@ -15,7 +12,7 @@ export default function BidsTable(props: {
             <th>ID</th>
             <th>Signer</th>
             <th>Submitted</th>
-            <th>Tip</th>
+            <th>⚡ Tip ⚡</th>
             <th>Amount</th>
             <th>Status</th>
           </tr>
@@ -34,7 +31,7 @@ export default function BidsTable(props: {
                 <td>{<Link to={bidUrl}>{truncatedBidId}</Link>}</td>
                 <td>{<Link to={etherscanUrl}>{truncatedAddress}</Link>}</td>
                 <td>{bid.submittedTimestamp}</td>
-                <td>?</td>
+                <td>Hidden</td>
                 <td>{bid.amount}</td>
                 <td>{bid.status}</td>
               </tr>

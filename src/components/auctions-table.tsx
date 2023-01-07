@@ -3,10 +3,10 @@ import { Auction } from "@site/src/__generated__/graphql";
 import Link from "@docusaurus/Link";
 import { useHistory } from "@docusaurus/router";
 import { displayEth, getAuctionId, hexBufferToString } from "@site/src/utils";
+import { parseEther } from "ethers/lib/utils";
 
 export default function AuctionsTable(props: {
   auctions: Auction[];
-  minRows?: number;
 }): JSX.Element {
   const history = useHistory();
 
@@ -15,14 +15,15 @@ export default function AuctionsTable(props: {
       <table>
         <thead>
           <tr>
-            <th>Name</th>
+            <th>Auction Name</th>
+            <th>Auction Contract</th>
             <th>Size</th>
             <th>Base Price</th>
             <th>Bid Start Block</th>
             <th>Bid End Block</th>
             <th>Total Bids</th>
             <th>Status</th>
-            <th>Token Contract</th>
+            <th>Ξ Collected</th>
           </tr>
         </thead>
         <tbody>
@@ -39,12 +40,6 @@ export default function AuctionsTable(props: {
                 <td>
                   {<Link to={`/explorer?auction=${id}`}>{auction.name}</Link>}
                 </td>
-                <td>{auction.maxUnits}</td>
-                <td>{displayEth(auction.price)}</td>
-                <td>{auction.bidStartBlock}</td>
-                <td>{auction.mintStartBlock}</td>
-                <td>{auction.bidsByAuctionAddressAndAuctionName.totalCount}</td>
-                <td>Bidding Open!</td>
                 <td>
                   {
                     <Link href={etherscanUrl} target="_blank">
@@ -52,6 +47,13 @@ export default function AuctionsTable(props: {
                     </Link>
                   }
                 </td>
+                <td>{auction.maxUnits}</td>
+                <td>{displayEth(auction.price)}</td>
+                <td>{auction.bidStartBlock}</td>
+                <td>{auction.mintStartBlock}</td>
+                <td>{auction.bidsByAuctionAddressAndAuctionName.totalCount}</td>
+                <td>Bidding Open!</td>
+                <td>{displayEth(parseEther("10").toString())}</td>
               </tr>
             );
           })}

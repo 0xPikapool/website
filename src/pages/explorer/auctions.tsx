@@ -19,7 +19,11 @@ export default function Auctions(): JSX.Element {
   );
 }
 
-function PaginatedAuctions({ itemsPerPage }) {
+function PaginatedAuctions({
+  itemsPerPage,
+}: {
+  itemsPerPage: number;
+}): JSX.Element {
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
   const [itemOffset, setItemOffset] = useState(0);
@@ -33,7 +37,6 @@ function PaginatedAuctions({ itemsPerPage }) {
 
   // Fetch the items to display on the current page.
   const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const queryResult = useQuery(GET_AUCTIONS, {
     variables: {
       offset: itemOffset,
@@ -52,9 +55,6 @@ function PaginatedAuctions({ itemsPerPage }) {
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
       const newOffset = (event.selected * itemsPerPage) % items;
-      console.log(
-        `User requested page number ${event.selected}, which is offset ${newOffset}`
-      );
       setItemOffset(newOffset);
     };
     return (
@@ -81,7 +81,7 @@ function PaginatedAuctions({ itemsPerPage }) {
         {queryResult.loading ? (
           <>Loading...</>
         ) : (
-          <AuctionsTable auctions={currentItems} minRows={itemsPerPage} />
+          <AuctionsTable auctions={currentItems} />
         )}
       </>
     );

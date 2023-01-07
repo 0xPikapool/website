@@ -18,10 +18,15 @@ export default function BidPage(props: { id: string }): JSX.Element {
   if (data) {
     const bid = data.bidByBidId as Bid;
     return (
-      <>
-        <div className="hero__subtitle">{`Bid ${props.id}`}</div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <BidVerbose bid={bid} />
-      </>
+      </div>
     );
   }
 

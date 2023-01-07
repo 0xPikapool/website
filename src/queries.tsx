@@ -31,7 +31,17 @@ export const GET_AUCTION = gql(`
       mintStartBlock
       maxUnits
       chainId
-      bidsByAuctionAddressAndAuctionName(first: 100, orderBy: SUBMITTED_TIMESTAMP_DESC) {
+      bidsByAuctionAddressAndAuctionName {
+        totalCount
+      }
+    }
+  }
+`);
+
+export const GET_AUCTION_BIDS = gql(`
+  query GetAuctionBids($address: String!, $name: String!, $offset: Int!) {
+    auctionByAddressAndName(address: $address, name: $name) {
+      bidsByAuctionAddressAndAuctionName(first: 10, offset: $offset, orderBy: SUBMITTED_TIMESTAMP_DESC) {
         nodes {
           bidId
           signer
@@ -39,13 +49,6 @@ export const GET_AUCTION = gql(`
           submittedTimestamp
           tipRevealed
           amount
-        }
-        totalCount
-      }
-      bundlesByAuctionAddressAndAuctionName {
-        nodes {
-          bundleHash
-          signerAddress
         }
         totalCount
       }

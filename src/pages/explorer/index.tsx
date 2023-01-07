@@ -23,21 +23,16 @@ const persistedLink = createPersistedQueryLink({
   disable: () => false,
 });
 
+const client = new ApolloClient({
+  link: ApolloLink.from([
+    persistedLink,
+    new HttpLink({ uri: "https://api.pikapool.cool/v0/graphql" }),
+  ]),
+  cache: new InMemoryCache(),
+});
+
 export default function Explorer(): JSX.Element {
   const history = useHistory();
-  const [client, setClient] =
-    useState<ApolloClient<NormalizedCacheObject> | null>(null);
-  useEffect(() => {
-    setClient(
-      new ApolloClient({
-        link: ApolloLink.from([
-          persistedLink,
-          new HttpLink({ uri: "https://api.pikapool.cool/v0/graphql" }),
-        ]),
-        cache: new InMemoryCache(),
-      })
-    );
-  }, []);
 
   if (client === null) return <p>Loading...</p>;
 
