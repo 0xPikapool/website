@@ -39,8 +39,8 @@ export default function AuctionPage(props: {
           alignItems: "center",
         }}
       >
-        <div className="hero__subtitle">{`Auction`}</div>
-        <AuctionsTable auctions={[auction]} />
+        <h1>{`${auction.name}`}</h1>
+        <AuctionsTable auctions={[auction]} showName={false} />
         <PaginatedAuctionBids
           name={props.name}
           address={props.address}

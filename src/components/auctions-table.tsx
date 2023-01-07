@@ -7,6 +7,7 @@ import { parseEther } from "ethers/lib/utils";
 
 export default function AuctionsTable(props: {
   auctions: Auction[];
+  showName: boolean;
 }): JSX.Element {
   const history = useHistory();
 
@@ -15,8 +16,8 @@ export default function AuctionsTable(props: {
       <table>
         <thead>
           <tr>
-            <th>Auction Name</th>
-            <th>Auction Contract</th>
+            {props.showName ? <th>Name</th> : null}
+            <th>Contract</th>
             <th>Size</th>
             <th>Base Price</th>
             <th>Bid Start Block</th>
@@ -37,9 +38,11 @@ export default function AuctionsTable(props: {
             const etherscanUrl = `https://etherscan.io/address/${auctionAddressStr}`;
             return (
               <tr key={id}>
-                <td>
-                  {<Link to={`/explorer?auction=${id}`}>{auction.name}</Link>}
-                </td>
+                {props.showName ? (
+                  <td>
+                    {<Link to={`/explorer?auction=${id}`}>{auction.name}</Link>}
+                  </td>
+                ) : null}
                 <td>
                   {
                     <Link href={etherscanUrl} target="_blank">
