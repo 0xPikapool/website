@@ -8,6 +8,8 @@ import { useQueryPollingWhileWindowFocused } from "@site/src/hooks/useQueryPolli
 import ReactPaginate from "react-paginate";
 
 export default function Auctions(): JSX.Element {
+  if (!ExecutionEnvironment.canUseDOM) return <p>Loading...</p>;
+
   return (
     <div
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
