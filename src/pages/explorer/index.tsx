@@ -32,7 +32,7 @@ export default function Explorer(): JSX.Element {
       new ApolloClient({
         link: ApolloLink.from([
           persistedLink,
-          new HttpLink({ uri: "http://54.221.131.24:5500/graphql" }),
+          new HttpLink({ uri: "https://api.pikapool.cool/v0/graphql" }),
         ]),
         cache: new InMemoryCache(),
       })

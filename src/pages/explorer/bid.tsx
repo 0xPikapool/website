@@ -8,7 +8,7 @@ import { useQueryPollingWhileWindowFocused } from "@site/src/hooks/useQueryPolli
 
 export default function BidPage(props: { id: string }): JSX.Element {
   if (!ExecutionEnvironment.canUseDOM) return <p>Loading...</p>;
-  const queryResult = useQuery(GET_BID);
+  const queryResult = useQuery(GET_BID, { variables: { bidId: props.id } });
   useQueryPollingWhileWindowFocused({ pollInterval: 1000, ...queryResult });
 
   const { loading, error, data } = queryResult;
