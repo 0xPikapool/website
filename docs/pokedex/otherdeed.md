@@ -29,6 +29,9 @@ The Otherdeed Mint had 3 parts, a Contributor Mint, BAYC & MAYC Holder Mint, and
 #### Average Gas Price per Block Surrounding the Mint
 ![Otherdeed Surrounding](/img/pokedex/otherdeed/otherdeed_surrounding.png)
 
+#### Average Gas Price per Block - Mint Blocks Removed
+![Otherdeed Removed](/img/pokedex/otherdeed/otherdeed_removed.png)
+
 ### BAYC & MAYC Holders
 | NFTs Minted | Participants | Average Gas Cost per NFT | Block Range | Failed TX's | Gas Spent on Failed TX's |
 |-------------|--------------|--------------------------|-------------|-------------|--------------------------|
