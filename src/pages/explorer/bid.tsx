@@ -5,10 +5,13 @@ import { GET_BID } from "../../queries";
 import { Bid } from "@site/src/__generated__/graphql";
 import BidVerbose from "@site/src/components/bid-verbose";
 import { useQueryPollingWhileWindowFocused } from "@site/src/hooks/useQueryPollingWhileWindowFocused";
+import { stringToHexBuffer } from "../../utils";
 
 export default function BidPage(props: { id: string }): JSX.Element {
   if (!ExecutionEnvironment.canUseDOM) return <p>Loading...</p>;
-  const queryResult = useQuery(GET_BID, { variables: { bidId: props.id } });
+  const queryResult = useQuery(GET_BID, {
+    variables: { bidId: stringToHexBuffer(props.id) },
+  });
   useQueryPollingWhileWindowFocused({ pollInterval: 1000, ...queryResult });
 
   const { loading, error, data } = queryResult;
