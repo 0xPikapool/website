@@ -6,6 +6,7 @@ import { displayEth, getAuctionId, hexBufferToString } from "@site/src/utils";
 
 export default function AuctionsTable(props: {
   auctions: Auction[];
+  minRows?: number;
 }): JSX.Element {
   const history = useHistory();
 
@@ -21,7 +22,7 @@ export default function AuctionsTable(props: {
             <th>Bid End Block</th>
             <th>Total Bids</th>
             <th>Status</th>
-            <th>Contract</th>
+            <th>Token Contract</th>
           </tr>
         </thead>
         <tbody>

@@ -2,8 +2,8 @@ import { useQuery } from "@apollo/client";
 import { gql } from "./__generated__/gql";
 
 export const GET_AUCTIONS = gql(`
-  query GetAuctions {
-    allAuctions(orderBy: BID_START_BLOCK_DESC, first: 100) {
+  query GetAuctions($offset: Int!) {
+    allAuctions(orderBy: BID_START_BLOCK_DESC, first: 10, offset: $offset) {
       nodes {
         address
         name
@@ -16,6 +16,7 @@ export const GET_AUCTIONS = gql(`
           totalCount
         }
       }
+      totalCount
     }
   }
 `);
