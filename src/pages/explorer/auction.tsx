@@ -6,17 +6,19 @@ import AuctionsTable from "../../components/auctions-table";
 import { Auction } from "@site/src/__generated__/graphql";
 import BidsTable from "@site/src/components/bids-table";
 import { stringToHexBuffer } from "@site/src/utils";
+import { useQueryPollingWhileWindowFocused } from "@site/src/hooks/useQueryPollingWhileWindowFocused";
 
 export default function AuctionPage(props: {
   name: string;
   address: string;
 }): JSX.Element {
   if (!ExecutionEnvironment.canUseDOM) return <p>Loading...</p>;
-
-  const { loading, error, data } = useQuery(GET_AUCTION, {
+  const queryResult = useQuery(GET_AUCTION, {
     variables: { name: props.name, address: stringToHexBuffer(props.address) },
-    pollInterval: 1000,
   });
+  useQueryPollingWhileWindowFocused({ pollInterval: 1000, ...queryResult });
+
+  const { loading, error, data } = queryResult;
   if (data) {
     const auction = data.auctionByAddressAndName as Auction;
     const bids = auction.bidsByAuctionAddressAndAuctionName.nodes;

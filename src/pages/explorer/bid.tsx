@@ -4,15 +4,14 @@ import { useQuery } from "@apollo/client";
 import { GET_BID } from "../../queries";
 import { Bid } from "@site/src/__generated__/graphql";
 import BidVerbose from "@site/src/components/bid-verbose";
-import { stringToHexBuffer } from "@site/src/utils";
+import { useQueryPollingWhileWindowFocused } from "@site/src/hooks/useQueryPollingWhileWindowFocused";
 
 export default function BidPage(props: { id: string }): JSX.Element {
   if (!ExecutionEnvironment.canUseDOM) return <p>Loading...</p>;
+  const queryResult = useQuery(GET_BID);
+  useQueryPollingWhileWindowFocused({ pollInterval: 1000, ...queryResult });
 
-  const { loading, error, data } = useQuery(GET_BID, {
-    variables: { bidId: stringToHexBuffer(props.id) },
-    pollInterval: 1000,
-  });
+  const { loading, error, data } = queryResult;
   if (data) {
     const bid = data.bidByBidId as Bid;
     return (
