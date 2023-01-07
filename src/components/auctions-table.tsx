@@ -24,7 +24,6 @@ export default function AuctionsTable(props: {
             <th>Bid End Block</th>
             <th>Total Bids</th>
             <th>Status</th>
-            <th>Ξ Collected</th>
           </tr>
         </thead>
         <tbody>
@@ -56,7 +55,6 @@ export default function AuctionsTable(props: {
                 <td>{auction.mintStartBlock}</td>
                 <td>{auction.bidsByAuctionAddressAndAuctionName.totalCount}</td>
                 <td>Bidding Open!</td>
-                <td>{displayEth(parseEther("10").toString())}</td>
               </tr>
             );
           })}

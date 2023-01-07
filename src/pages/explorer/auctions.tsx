@@ -81,7 +81,7 @@ function PaginatedAuctions({
         {queryResult.loading ? (
           <>Loading...</>
         ) : (
-          <AuctionsTable auctions={currentItems} />
+          <AuctionsTable auctions={currentItems} showName={true} />
         )}
       </>
     );
