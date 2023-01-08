@@ -1,9 +1,16 @@
 import React from "react";
 import { Bid } from "@site/src/__generated__/graphql";
 import Link from "@docusaurus/Link";
-import { displayEth, hexBufferToString } from "@site/src/utils";
+import {
+  createEtherscanUrl,
+  displayEth,
+  hexBufferToString,
+} from "@site/src/utils";
 
-export default function BidsTable(props: { bids: Bid[] }): JSX.Element {
+export default function BidsTable(props: {
+  bids: Bid[];
+  chainId: 1 | 5;
+}): JSX.Element {
   return (
     <>
       <table>
@@ -24,7 +31,11 @@ export default function BidsTable(props: { bids: Bid[] }): JSX.Element {
             const truncatedBidId = idStr.slice(0, 4) + "..." + idStr.slice(-4);
             const truncatedAddress =
               signerStr.slice(0, 6) + "..." + signerStr.slice(-4);
-            const etherscanUrl = `https://etherscan.io/address/${signerStr}`;
+            const etherscanUrl = createEtherscanUrl(
+              signerStr,
+              props.chainId,
+              "address"
+            );
             const bidUrl = `/explorer?bid=${idStr}`;
             return (
               <tr key={bid.bidId}>

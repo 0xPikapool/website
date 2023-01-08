@@ -1,13 +1,19 @@
 import React from "react";
 import { Bid } from "@site/src/__generated__/graphql";
 import Link from "@docusaurus/Link";
-import { displayEth, getAuctionId, hexBufferToString } from "../utils";
+import {
+  createEtherscanUrl,
+  displayEth,
+  getAuctionId,
+  hexBufferToString,
+} from "../utils";
 
 export default function BidVerbose(props: { bid: Bid }): JSX.Element {
   const { bid } = props;
   const basePrice = bid.auctionByAuctionAddressAndAuctionName.price;
   const signerStr = hexBufferToString(bid.signer);
   const auctionAddressStr = hexBufferToString(bid.auctionAddress);
+  const chainId = bid.auctionByAuctionAddressAndAuctionName.chainId;
   const auctionUrl = `/explorer?auction=${getAuctionId(
     auctionAddressStr,
     bid.auctionName
@@ -43,7 +49,7 @@ export default function BidVerbose(props: { bid: Bid }): JSX.Element {
           <tr>
             <th align="right">Signer</th>
             <td>
-              <Link to={`https://etherscan.io/address/${signerStr}`}>
+              <Link to={createEtherscanUrl(signerStr, chainId, "address")}>
                 {signerStr}
               </Link>
             </td>
@@ -77,9 +83,11 @@ export default function BidVerbose(props: { bid: Bid }): JSX.Element {
                 "n/a"
               ) : (
                 <Link
-                  to={`https://etherscan.io/tx/${hexBufferToString(
-                    bid.txHash
-                  )}`}
+                  to={createEtherscanUrl(
+                    hexBufferToString(bid.txHash),
+                    chainId,
+                    "tx"
+                  )}
                 >
                   {hexBufferToString(bid.txHash)}
                 </Link>

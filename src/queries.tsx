@@ -41,6 +41,7 @@ export const GET_AUCTION = gql(`
 export const GET_AUCTION_BIDS = gql(`
   query GetAuctionBids($address: String!, $name: String!, $offset: Int!) {
     auctionByAddressAndName(address: $address, name: $name) {
+      chainId
       bidsByAuctionAddressAndAuctionName(first: 10, offset: $offset, orderBy: SUBMITTED_TIMESTAMP_DESC) {
         nodes {
           bidId
@@ -74,6 +75,7 @@ export const GET_BID = gql(`
       amount
       auctionByAuctionAddressAndAuctionName {
         price
+        chainId
       }
     }
   }

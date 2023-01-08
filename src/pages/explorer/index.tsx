@@ -15,6 +15,15 @@ import AuctionPage from "./auction";
 import { useHistory } from "@docusaurus/router";
 import BidPage from "./bid";
 import { parseAuctionId } from "@site/src/utils";
+import {
+  configureChains,
+  createClient,
+  goerli,
+  mainnet,
+  WagmiConfig,
+} from "wagmi";
+import { publicProvider } from "wagmi/providers/public";
+import { InjectedConnector } from "wagmi/connectors/injected";
 
 const hashes = require("../../__generated__/client.json");
 const persistedLink = createPersistedQueryLink({
@@ -23,7 +32,18 @@ const persistedLink = createPersistedQueryLink({
   disable: () => false,
 });
 
-const client = new ApolloClient({
+const { chains, provider } = configureChains(
+  [mainnet, goerli],
+  [publicProvider()]
+);
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  // connectors: [new InjectedProvider({ chains })],
+  provider,
+});
+
+const apolloClient = new ApolloClient({
   link: ApolloLink.from([
     persistedLink,
     new HttpLink({ uri: "https://api.pikapool.cool/v0/graphql" }),
@@ -33,8 +53,7 @@ const client = new ApolloClient({
 
 export default function Explorer(): JSX.Element {
   const history = useHistory();
-
-  if (client === null) return <p>Loading...</p>;
+  if (apolloClient === null) return <p>Loading...</p>;
 
   let inner = <AuctionsPage />;
   if (history.location.search.startsWith("?auction=")) {
@@ -47,10 +66,12 @@ export default function Explorer(): JSX.Element {
   }
 
   return (
-    <ApolloProvider client={client}>
-      <Layout>
-        <main style={{ margin: "40px" }}>{inner}</main>
-      </Layout>
-    </ApolloProvider>
+    <WagmiConfig client={wagmiClient}>
+      <ApolloProvider client={apolloClient}>
+        <Layout>
+          <main style={{ margin: "40px" }}>{inner}</main>
+        </Layout>
+      </ApolloProvider>
+    </WagmiConfig>
   );
 }

@@ -1,21 +1,60 @@
 import React from "react";
 import { Auction } from "@site/src/__generated__/graphql";
 import Link from "@docusaurus/Link";
-import { useHistory } from "@docusaurus/router";
-import { displayEth, getAuctionId, hexBufferToString } from "@site/src/utils";
-import { parseEther } from "ethers/lib/utils";
+import {
+  createEtherscanUrl,
+  displayEth,
+  getAuctionId,
+  hexBufferToString,
+} from "@site/src/utils";
+import { useBlockNumber } from "wagmi";
+
+interface BlockNumbers {
+  1: { data: number | undefined; isLoading: boolean; error: Error | null };
+  5: { data: number | undefined; isLoading: boolean; error: Error | null };
+}
+
+function getAuctionStatus(
+  auction: Auction,
+  blockNumbers: BlockNumbers
+): string {
+  if (
+    !blockNumbers[auction.chainId] ||
+    blockNumbers[auction.chainId].isLoading
+  ) {
+    return "Thinking...";
+  }
+
+  if (blockNumbers[auction.chainId].error) {
+    return "Error";
+  }
+
+  const blockNumber = blockNumbers[auction.chainId].data;
+  if (auction.bidStartBlock > blockNumber) {
+    return "Starting soon";
+  } else if (blockNumber > auction.mintStartBlock) {
+    return "Closed";
+  }
+  return "Open";
+}
 
 export default function AuctionsTable(props: {
   auctions: Auction[];
   showName: boolean;
 }): JSX.Element {
-  const history = useHistory();
+  const blockNumbers = {
+    1: useBlockNumber({ chainId: 1 }),
+    5: useBlockNumber({ chainId: 5 }),
+  } as BlockNumbers;
+
+  console.log(blockNumbers);
 
   return (
     <>
       <table>
         <thead>
           <tr>
+            <th>Chain ID</th>
             {props.showName ? <th>Name</th> : null}
             <th>Contract</th>
             <th>Size</th>
@@ -34,9 +73,14 @@ export default function AuctionsTable(props: {
               auctionAddressStr.slice(0, 6) +
               "..." +
               auctionAddressStr.slice(-4);
-            const etherscanUrl = `https://etherscan.io/address/${auctionAddressStr}`;
+            const etherscanUrl = createEtherscanUrl(
+              auctionAddressStr,
+              auction.chainId,
+              "address"
+            );
             return (
               <tr key={id}>
+                <td>{auction.chainId}</td>
                 {props.showName ? (
                   <td>
                     {<Link to={`/explorer?auction=${id}`}>{auction.name}</Link>}
@@ -54,7 +98,7 @@ export default function AuctionsTable(props: {
                 <td>{auction.bidStartBlock}</td>
                 <td>{auction.mintStartBlock}</td>
                 <td>{auction.bidsByAuctionAddressAndAuctionName.totalCount}</td>
-                <td>Bidding Open!</td>
+                <td>{getAuctionStatus(auction, blockNumbers)}</td>
               </tr>
             );
           })}

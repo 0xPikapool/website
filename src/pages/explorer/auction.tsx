@@ -142,7 +142,7 @@ function PaginatedAuctionBids({
           <>Loading...</>
         ) : (
           <>
-            <BidsTable bids={currentBids} />
+            <BidsTable bids={currentBids} chainId={auction.chainId} />
           </>
         )}
       </div>

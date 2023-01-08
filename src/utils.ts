@@ -22,3 +22,14 @@ export function parseAuctionId(auctionId: string) {
 export function displayEth(amount: string) {
   return "Ξ" + utils.formatEther(amount);
 }
+
+export function createEtherscanUrl(
+  id: string,
+  chainId: 1 | 5,
+  type: "address" | "tx"
+) {
+  if (chainId === 1) {
+    return `https://etherscan.io/${type}/${id}`;
+  }
+  return `https://goerli.etherscan.io/${type}/${id}`;
+}
