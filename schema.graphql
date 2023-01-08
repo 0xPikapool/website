@@ -1,0 +1,1284 @@
+"""Exposes a URL that specifies the behaviour of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behaviour of this scalar."""
+  url: String!
+) on SCALAR
+
+type Auction implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  address: String!
+  name: String!
+  bidStartBlock: BigFloat!
+  mintStartBlock: BigFloat!
+  price: BigFloat!
+  maxUnits: BigFloat!
+  chainId: BigFloat!
+  lastUpdated: Datetime!
+
+  """Reads and enables pagination through a set of `Bid`."""
+  bidsByAuctionAddressAndAuctionName(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Bid`."""
+    orderBy: [BidsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: BidCondition
+  ): BidsConnection!
+
+  """Reads and enables pagination through a set of `Bundle`."""
+  bundlesByAuctionAddressAndAuctionName(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Bundle`."""
+    orderBy: [BundlesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: BundleCondition
+  ): BundlesConnection!
+}
+
+"""
+A condition to be used against `Auction` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input AuctionCondition {
+  """Checks for equality with the object’s `address` field."""
+  address: String
+
+  """Checks for equality with the object’s `name` field."""
+  name: String
+
+  """Checks for equality with the object’s `bidStartBlock` field."""
+  bidStartBlock: BigFloat
+
+  """Checks for equality with the object’s `mintStartBlock` field."""
+  mintStartBlock: BigFloat
+
+  """Checks for equality with the object’s `price` field."""
+  price: BigFloat
+
+  """Checks for equality with the object’s `maxUnits` field."""
+  maxUnits: BigFloat
+
+  """Checks for equality with the object’s `chainId` field."""
+  chainId: BigFloat
+
+  """Checks for equality with the object’s `lastUpdated` field."""
+  lastUpdated: Datetime
+}
+
+"""An input for mutations affecting `Auction`"""
+input AuctionInput {
+  address: String!
+  name: String!
+  bidStartBlock: BigFloat!
+  mintStartBlock: BigFloat!
+  price: BigFloat!
+  maxUnits: BigFloat!
+  chainId: BigFloat!
+  lastUpdated: Datetime!
+}
+
+"""
+Represents an update to a `Auction`. Fields that are set will be updated.
+"""
+input AuctionPatch {
+  address: String
+  name: String
+  bidStartBlock: BigFloat
+  mintStartBlock: BigFloat
+  price: BigFloat
+  maxUnits: BigFloat
+  chainId: BigFloat
+  lastUpdated: Datetime
+}
+
+"""A connection to a list of `Auction` values."""
+type AuctionsConnection {
+  """A list of `Auction` objects."""
+  nodes: [Auction]!
+
+  """
+  A list of edges which contains the `Auction` and cursor to aid in pagination.
+  """
+  edges: [AuctionsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Auction` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Auction` edge in the connection."""
+type AuctionsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Auction` at the end of the edge."""
+  node: Auction
+}
+
+"""Methods to use when ordering `Auction`."""
+enum AuctionsOrderBy {
+  NATURAL
+  ADDRESS_ASC
+  ADDRESS_DESC
+  NAME_ASC
+  NAME_DESC
+  BID_START_BLOCK_ASC
+  BID_START_BLOCK_DESC
+  MINT_START_BLOCK_ASC
+  MINT_START_BLOCK_DESC
+  PRICE_ASC
+  PRICE_DESC
+  MAX_UNITS_ASC
+  MAX_UNITS_DESC
+  CHAIN_ID_ASC
+  CHAIN_ID_DESC
+  LAST_UPDATED_ASC
+  LAST_UPDATED_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+type Bid implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  bidId: String!
+  auctionAddress: String!
+  auctionName: String!
+  bundleHash: String
+  txHash: String
+  signer: String!
+  amount: BigFloat!
+  tipHidden: BigFloat!
+  tipRevealed: BigFloat
+  status: BidStatus!
+  submittedTimestamp: Datetime!
+  statusLastUpdated: Datetime!
+  signature: String!
+  replacedBy: String
+
+  """Reads a single `Auction` that is related to this `Bid`."""
+  auctionByAuctionAddressAndAuctionName: Auction
+
+  """Reads a single `Bundle` that is related to this `Bid`."""
+  bundleByBundleHash: Bundle
+
+  """Reads a single `Bid` that is related to this `Bid`."""
+  bidByReplacedBy: Bid
+
+  """Reads and enables pagination through a set of `Bid`."""
+  bidsByReplacedBy(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Bid`."""
+    orderBy: [BidsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: BidCondition
+  ): BidsConnection!
+}
+
+"""
+A condition to be used against `Bid` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input BidCondition {
+  """Checks for equality with the object’s `bidId` field."""
+  bidId: String
+
+  """Checks for equality with the object’s `auctionAddress` field."""
+  auctionAddress: String
+
+  """Checks for equality with the object’s `auctionName` field."""
+  auctionName: String
+
+  """Checks for equality with the object’s `bundleHash` field."""
+  bundleHash: String
+
+  """Checks for equality with the object’s `txHash` field."""
+  txHash: String
+
+  """Checks for equality with the object’s `signer` field."""
+  signer: String
+
+  """Checks for equality with the object’s `amount` field."""
+  amount: BigFloat
+
+  """Checks for equality with the object’s `tipHidden` field."""
+  tipHidden: BigFloat
+
+  """Checks for equality with the object’s `tipRevealed` field."""
+  tipRevealed: BigFloat
+
+  """Checks for equality with the object’s `status` field."""
+  status: BidStatus
+
+  """Checks for equality with the object’s `submittedTimestamp` field."""
+  submittedTimestamp: Datetime
+
+  """Checks for equality with the object’s `statusLastUpdated` field."""
+  statusLastUpdated: Datetime
+
+  """Checks for equality with the object’s `signature` field."""
+  signature: String
+
+  """Checks for equality with the object’s `replacedBy` field."""
+  replacedBy: String
+}
+
+"""An input for mutations affecting `Bid`"""
+input BidInput {
+  bidId: String!
+  auctionAddress: String!
+  auctionName: String!
+  bundleHash: String
+  txHash: String
+  signer: String!
+  amount: BigFloat!
+  tipHidden: BigFloat!
+  tipRevealed: BigFloat
+  status: BidStatus!
+  submittedTimestamp: Datetime!
+  statusLastUpdated: Datetime!
+  signature: String!
+  replacedBy: String
+}
+
+"""Represents an update to a `Bid`. Fields that are set will be updated."""
+input BidPatch {
+  bidId: String
+  auctionAddress: String
+  auctionName: String
+  bundleHash: String
+  txHash: String
+  signer: String
+  amount: BigFloat
+  tipHidden: BigFloat
+  tipRevealed: BigFloat
+  status: BidStatus
+  submittedTimestamp: Datetime
+  statusLastUpdated: Datetime
+  signature: String
+  replacedBy: String
+}
+
+"""A connection to a list of `Bid` values."""
+type BidsConnection {
+  """A list of `Bid` objects."""
+  nodes: [Bid]!
+
+  """
+  A list of edges which contains the `Bid` and cursor to aid in pagination.
+  """
+  edges: [BidsEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Bid` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Bid` edge in the connection."""
+type BidsEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Bid` at the end of the edge."""
+  node: Bid
+}
+
+"""Methods to use when ordering `Bid`."""
+enum BidsOrderBy {
+  NATURAL
+  BID_ID_ASC
+  BID_ID_DESC
+  AUCTION_ADDRESS_ASC
+  AUCTION_ADDRESS_DESC
+  AUCTION_NAME_ASC
+  AUCTION_NAME_DESC
+  BUNDLE_HASH_ASC
+  BUNDLE_HASH_DESC
+  TX_HASH_ASC
+  TX_HASH_DESC
+  SIGNER_ASC
+  SIGNER_DESC
+  AMOUNT_ASC
+  AMOUNT_DESC
+  TIP_HIDDEN_ASC
+  TIP_HIDDEN_DESC
+  TIP_REVEALED_ASC
+  TIP_REVEALED_DESC
+  STATUS_ASC
+  STATUS_DESC
+  SUBMITTED_TIMESTAMP_ASC
+  SUBMITTED_TIMESTAMP_DESC
+  STATUS_LAST_UPDATED_ASC
+  STATUS_LAST_UPDATED_DESC
+  SIGNATURE_ASC
+  SIGNATURE_DESC
+  REPLACED_BY_ASC
+  REPLACED_BY_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+enum BidStatus {
+  REPLACED
+  SUBMITTED
+  SETTLED
+  REVERTED
+}
+
+"""
+A floating point number that requires more precision than IEEE 754 binary 64
+"""
+scalar BigFloat
+
+type Bundle implements Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+  bundleHash: String!
+  blockNumber: BigFloat!
+  signerAddress: String!
+  auctionAddress: String!
+  auctionName: String!
+
+  """Reads a single `Auction` that is related to this `Bundle`."""
+  auctionByAuctionAddressAndAuctionName: Auction
+
+  """Reads and enables pagination through a set of `Bid`."""
+  bidsByBundleHash(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Bid`."""
+    orderBy: [BidsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: BidCondition
+  ): BidsConnection!
+}
+
+"""
+A condition to be used against `Bundle` object types. All fields are tested for equality and combined with a logical ‘and.’
+"""
+input BundleCondition {
+  """Checks for equality with the object’s `bundleHash` field."""
+  bundleHash: String
+
+  """Checks for equality with the object’s `blockNumber` field."""
+  blockNumber: BigFloat
+
+  """Checks for equality with the object’s `signerAddress` field."""
+  signerAddress: String
+
+  """Checks for equality with the object’s `auctionAddress` field."""
+  auctionAddress: String
+
+  """Checks for equality with the object’s `auctionName` field."""
+  auctionName: String
+}
+
+"""An input for mutations affecting `Bundle`"""
+input BundleInput {
+  bundleHash: String!
+  blockNumber: BigFloat!
+  signerAddress: String!
+  auctionAddress: String!
+  auctionName: String!
+}
+
+"""
+Represents an update to a `Bundle`. Fields that are set will be updated.
+"""
+input BundlePatch {
+  bundleHash: String
+  blockNumber: BigFloat
+  signerAddress: String
+  auctionAddress: String
+  auctionName: String
+}
+
+"""A connection to a list of `Bundle` values."""
+type BundlesConnection {
+  """A list of `Bundle` objects."""
+  nodes: [Bundle]!
+
+  """
+  A list of edges which contains the `Bundle` and cursor to aid in pagination.
+  """
+  edges: [BundlesEdge!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """The count of *all* `Bundle` you could get from the connection."""
+  totalCount: Int!
+}
+
+"""A `Bundle` edge in the connection."""
+type BundlesEdge {
+  """A cursor for use in pagination."""
+  cursor: Cursor
+
+  """The `Bundle` at the end of the edge."""
+  node: Bundle
+}
+
+"""Methods to use when ordering `Bundle`."""
+enum BundlesOrderBy {
+  NATURAL
+  BUNDLE_HASH_ASC
+  BUNDLE_HASH_DESC
+  BLOCK_NUMBER_ASC
+  BLOCK_NUMBER_DESC
+  SIGNER_ADDRESS_ASC
+  SIGNER_ADDRESS_DESC
+  AUCTION_ADDRESS_ASC
+  AUCTION_ADDRESS_DESC
+  AUCTION_NAME_ASC
+  AUCTION_NAME_DESC
+  PRIMARY_KEY_ASC
+  PRIMARY_KEY_DESC
+}
+
+"""All input for the create `Auction` mutation."""
+input CreateAuctionInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Auction` to be created by this mutation."""
+  auction: AuctionInput!
+}
+
+"""The output of our create `Auction` mutation."""
+type CreateAuctionPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Auction` that was created by this mutation."""
+  auction: Auction
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Auction`. May be used by Relay 1."""
+  auctionEdge(
+    """The method to use when ordering `Auction`."""
+    orderBy: [AuctionsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AuctionsEdge
+}
+
+"""All input for the create `Bid` mutation."""
+input CreateBidInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Bid` to be created by this mutation."""
+  bid: BidInput!
+}
+
+"""The output of our create `Bid` mutation."""
+type CreateBidPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Bid` that was created by this mutation."""
+  bid: Bid
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Auction` that is related to this `Bid`."""
+  auctionByAuctionAddressAndAuctionName: Auction
+
+  """Reads a single `Bundle` that is related to this `Bid`."""
+  bundleByBundleHash: Bundle
+
+  """Reads a single `Bid` that is related to this `Bid`."""
+  bidByReplacedBy: Bid
+
+  """An edge for our `Bid`. May be used by Relay 1."""
+  bidEdge(
+    """The method to use when ordering `Bid`."""
+    orderBy: [BidsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): BidsEdge
+}
+
+"""All input for the create `Bundle` mutation."""
+input CreateBundleInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """The `Bundle` to be created by this mutation."""
+  bundle: BundleInput!
+}
+
+"""The output of our create `Bundle` mutation."""
+type CreateBundlePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Bundle` that was created by this mutation."""
+  bundle: Bundle
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Auction` that is related to this `Bundle`."""
+  auctionByAuctionAddressAndAuctionName: Auction
+
+  """An edge for our `Bundle`. May be used by Relay 1."""
+  bundleEdge(
+    """The method to use when ordering `Bundle`."""
+    orderBy: [BundlesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): BundlesEdge
+}
+
+"""A location in a connection that can be used for resuming pagination."""
+scalar Cursor
+
+"""
+A point in time as described by the [ISO
+8601](https://en.wikipedia.org/wiki/ISO_8601) standard. May or may not include a timezone.
+"""
+scalar Datetime
+
+"""All input for the `deleteAuctionByAddressAndName` mutation."""
+input DeleteAuctionByAddressAndNameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  address: String!
+  name: String!
+}
+
+"""All input for the `deleteAuction` mutation."""
+input DeleteAuctionInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Auction` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Auction` mutation."""
+type DeleteAuctionPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Auction` that was deleted by this mutation."""
+  auction: Auction
+  deletedAuctionId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Auction`. May be used by Relay 1."""
+  auctionEdge(
+    """The method to use when ordering `Auction`."""
+    orderBy: [AuctionsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AuctionsEdge
+}
+
+"""All input for the `deleteBidByBidId` mutation."""
+input DeleteBidByBidIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  bidId: String!
+}
+
+"""All input for the `deleteBid` mutation."""
+input DeleteBidInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Bid` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Bid` mutation."""
+type DeleteBidPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Bid` that was deleted by this mutation."""
+  bid: Bid
+  deletedBidId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Auction` that is related to this `Bid`."""
+  auctionByAuctionAddressAndAuctionName: Auction
+
+  """Reads a single `Bundle` that is related to this `Bid`."""
+  bundleByBundleHash: Bundle
+
+  """Reads a single `Bid` that is related to this `Bid`."""
+  bidByReplacedBy: Bid
+
+  """An edge for our `Bid`. May be used by Relay 1."""
+  bidEdge(
+    """The method to use when ordering `Bid`."""
+    orderBy: [BidsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): BidsEdge
+}
+
+"""All input for the `deleteBundleByBundleHash` mutation."""
+input DeleteBundleByBundleHashInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+  bundleHash: String!
+}
+
+"""All input for the `deleteBundle` mutation."""
+input DeleteBundleInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Bundle` to be deleted.
+  """
+  nodeId: ID!
+}
+
+"""The output of our delete `Bundle` mutation."""
+type DeleteBundlePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Bundle` that was deleted by this mutation."""
+  bundle: Bundle
+  deletedBundleId: ID
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Auction` that is related to this `Bundle`."""
+  auctionByAuctionAddressAndAuctionName: Auction
+
+  """An edge for our `Bundle`. May be used by Relay 1."""
+  bundleEdge(
+    """The method to use when ordering `Bundle`."""
+    orderBy: [BundlesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): BundlesEdge
+}
+
+type ListenPayload {
+  """
+  Our root query field type. Allows us to run any query from our subscription payload.
+  """
+  query: Query
+  relatedNode: Node
+  relatedNodeId: ID
+}
+
+"""
+The root mutation type which contains root level fields which mutate data.
+"""
+type Mutation {
+  """Creates a single `Auction`."""
+  createAuction(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateAuctionInput!
+  ): CreateAuctionPayload
+
+  """Creates a single `Bid`."""
+  createBid(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateBidInput!
+  ): CreateBidPayload
+
+  """Creates a single `Bundle`."""
+  createBundle(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: CreateBundleInput!
+  ): CreateBundlePayload
+
+  """Updates a single `Auction` using its globally unique id and a patch."""
+  updateAuction(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAuctionInput!
+  ): UpdateAuctionPayload
+
+  """Updates a single `Auction` using a unique key and a patch."""
+  updateAuctionByAddressAndName(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateAuctionByAddressAndNameInput!
+  ): UpdateAuctionPayload
+
+  """Updates a single `Bid` using its globally unique id and a patch."""
+  updateBid(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateBidInput!
+  ): UpdateBidPayload
+
+  """Updates a single `Bid` using a unique key and a patch."""
+  updateBidByBidId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateBidByBidIdInput!
+  ): UpdateBidPayload
+
+  """Updates a single `Bundle` using its globally unique id and a patch."""
+  updateBundle(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateBundleInput!
+  ): UpdateBundlePayload
+
+  """Updates a single `Bundle` using a unique key and a patch."""
+  updateBundleByBundleHash(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: UpdateBundleByBundleHashInput!
+  ): UpdateBundlePayload
+
+  """Deletes a single `Auction` using its globally unique id."""
+  deleteAuction(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAuctionInput!
+  ): DeleteAuctionPayload
+
+  """Deletes a single `Auction` using a unique key."""
+  deleteAuctionByAddressAndName(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteAuctionByAddressAndNameInput!
+  ): DeleteAuctionPayload
+
+  """Deletes a single `Bid` using its globally unique id."""
+  deleteBid(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteBidInput!
+  ): DeleteBidPayload
+
+  """Deletes a single `Bid` using a unique key."""
+  deleteBidByBidId(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteBidByBidIdInput!
+  ): DeleteBidPayload
+
+  """Deletes a single `Bundle` using its globally unique id."""
+  deleteBundle(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteBundleInput!
+  ): DeleteBundlePayload
+
+  """Deletes a single `Bundle` using a unique key."""
+  deleteBundleByBundleHash(
+    """
+    The exclusive input argument for this mutation. An object type, make sure to see documentation for this object’s fields.
+    """
+    input: DeleteBundleByBundleHashInput!
+  ): DeleteBundlePayload
+}
+
+"""An object with a globally unique `ID`."""
+interface Node {
+  """
+  A globally unique identifier. Can be used in various places throughout the system to identify this single value.
+  """
+  nodeId: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: Cursor
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: Cursor
+}
+
+"""The root query type which gives access points into the data universe."""
+type Query implements Node {
+  """
+  Exposes the root query type nested one level down. This is helpful for Relay 1
+  which can only query top level fields if they are in a particular form.
+  """
+  query: Query!
+
+  """
+  The root query type must be a `Node` to work well with Relay 1 mutations. This just resolves to `query`.
+  """
+  nodeId: ID!
+
+  """Fetches an object given its globally unique `ID`."""
+  node(
+    """The globally unique `ID`."""
+    nodeId: ID!
+  ): Node
+
+  """Reads and enables pagination through a set of `Auction`."""
+  allAuctions(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Auction`."""
+    orderBy: [AuctionsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: AuctionCondition
+  ): AuctionsConnection
+
+  """Reads and enables pagination through a set of `Bid`."""
+  allBids(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Bid`."""
+    orderBy: [BidsOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: BidCondition
+  ): BidsConnection
+
+  """Reads and enables pagination through a set of `Bundle`."""
+  allBundles(
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """Only read the last `n` values of the set."""
+    last: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+
+    """Read all values in the set before (above) this cursor."""
+    before: Cursor
+
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+
+    """The method to use when ordering `Bundle`."""
+    orderBy: [BundlesOrderBy!] = [PRIMARY_KEY_ASC]
+
+    """
+    A condition to be used in determining which values should be returned by the collection.
+    """
+    condition: BundleCondition
+  ): BundlesConnection
+  auctionByAddressAndName(address: String!, name: String!): Auction
+  bidByBidId(bidId: String!): Bid
+  bundleByBundleHash(bundleHash: String!): Bundle
+
+  """Reads a single `Auction` using its globally unique `ID`."""
+  auction(
+    """The globally unique `ID` to be used in selecting a single `Auction`."""
+    nodeId: ID!
+  ): Auction
+
+  """Reads a single `Bid` using its globally unique `ID`."""
+  bid(
+    """The globally unique `ID` to be used in selecting a single `Bid`."""
+    nodeId: ID!
+  ): Bid
+
+  """Reads a single `Bundle` using its globally unique `ID`."""
+  bundle(
+    """The globally unique `ID` to be used in selecting a single `Bundle`."""
+    nodeId: ID!
+  ): Bundle
+}
+
+"""
+The root subscription type: contains realtime events you can subscribe to with the `subscription` operation.
+"""
+type Subscription {
+  listen(topic: String!): ListenPayload!
+}
+
+"""All input for the `updateAuctionByAddressAndName` mutation."""
+input UpdateAuctionByAddressAndNameInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Auction` being updated.
+  """
+  auctionPatch: AuctionPatch!
+  address: String!
+  name: String!
+}
+
+"""All input for the `updateAuction` mutation."""
+input UpdateAuctionInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Auction` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Auction` being updated.
+  """
+  auctionPatch: AuctionPatch!
+}
+
+"""The output of our update `Auction` mutation."""
+type UpdateAuctionPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Auction` that was updated by this mutation."""
+  auction: Auction
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """An edge for our `Auction`. May be used by Relay 1."""
+  auctionEdge(
+    """The method to use when ordering `Auction`."""
+    orderBy: [AuctionsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): AuctionsEdge
+}
+
+"""All input for the `updateBidByBidId` mutation."""
+input UpdateBidByBidIdInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Bid` being updated.
+  """
+  bidPatch: BidPatch!
+  bidId: String!
+}
+
+"""All input for the `updateBid` mutation."""
+input UpdateBidInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Bid` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Bid` being updated.
+  """
+  bidPatch: BidPatch!
+}
+
+"""The output of our update `Bid` mutation."""
+type UpdateBidPayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Bid` that was updated by this mutation."""
+  bid: Bid
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Auction` that is related to this `Bid`."""
+  auctionByAuctionAddressAndAuctionName: Auction
+
+  """Reads a single `Bundle` that is related to this `Bid`."""
+  bundleByBundleHash: Bundle
+
+  """Reads a single `Bid` that is related to this `Bid`."""
+  bidByReplacedBy: Bid
+
+  """An edge for our `Bid`. May be used by Relay 1."""
+  bidEdge(
+    """The method to use when ordering `Bid`."""
+    orderBy: [BidsOrderBy!] = [PRIMARY_KEY_ASC]
+  ): BidsEdge
+}
+
+"""All input for the `updateBundleByBundleHash` mutation."""
+input UpdateBundleByBundleHashInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  An object where the defined keys will be set on the `Bundle` being updated.
+  """
+  bundlePatch: BundlePatch!
+  bundleHash: String!
+}
+
+"""All input for the `updateBundle` mutation."""
+input UpdateBundleInput {
+  """
+  An arbitrary string value with no semantic meaning. Will be included in the
+  payload verbatim. May be used to track mutations by the client.
+  """
+  clientMutationId: String
+
+  """
+  The globally unique `ID` which will identify a single `Bundle` to be updated.
+  """
+  nodeId: ID!
+
+  """
+  An object where the defined keys will be set on the `Bundle` being updated.
+  """
+  bundlePatch: BundlePatch!
+}
+
+"""The output of our update `Bundle` mutation."""
+type UpdateBundlePayload {
+  """
+  The exact same `clientMutationId` that was provided in the mutation input,
+  unchanged and unused. May be used by a client to track mutations.
+  """
+  clientMutationId: String
+
+  """The `Bundle` that was updated by this mutation."""
+  bundle: Bundle
+
+  """
+  Our root query field type. Allows us to run any query from our mutation payload.
+  """
+  query: Query
+
+  """Reads a single `Auction` that is related to this `Bundle`."""
+  auctionByAuctionAddressAndAuctionName: Auction
+
+  """An edge for our `Bundle`. May be used by Relay 1."""
+  bundleEdge(
+    """The method to use when ordering `Bundle`."""
+    orderBy: [BundlesOrderBy!] = [PRIMARY_KEY_ASC]
+  ): BundlesEdge
+}
+

@@ -69,6 +69,7 @@ const config = {
           src: 'img/pikapool.png',
         },
         items: [
+          { to: '/explorer', label: 'Explorer (Alpha)', position: 'left' },
           {
             type: 'doc',
             docId: 'index',
