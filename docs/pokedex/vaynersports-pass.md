@@ -28,3 +28,6 @@ The VSP Mint was an entirely open mint
 
 #### Average Gas Price per Block Surrounding the Mint
 ![VSP Surrounding](/img/pokedex/vsp/vsp_surrounding.png)
+
+#### Average Gas Price - Mint Blocks Removed
+![VSP Surrounding](/img/pokedex/vsp/vsp_removed.png)

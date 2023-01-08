@@ -52,11 +52,6 @@ module.exports = {
     },
     {
       type: 'doc',
-      label: 'Mint Pokedex',
-      id: 'pokedex',
-    },
-    {
-      type: 'doc',
       label: 'Pikapool Auctions',
       id: 'auctions',
     },
