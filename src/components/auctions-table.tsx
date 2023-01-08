@@ -30,9 +30,9 @@ function getAuctionStatus(
   }
 
   const blockNumber = blockNumbers[auction.chainId].data;
-  if (auction.bidStartBlock > blockNumber) {
+  if (Number(auction.bidStartBlock) > blockNumber) {
     return "Starting soon";
-  } else if (blockNumber > auction.mintStartBlock) {
+  } else if (blockNumber > Number(auction.mintStartBlock)) {
     return "Closed";
   }
   return "Open";
