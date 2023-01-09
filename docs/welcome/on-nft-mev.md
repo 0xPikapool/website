@@ -24,7 +24,7 @@ There are many other cool auction designs to experiment with at the smart contra
 
 ### EIP 1559
 
-EIP-1559 solved many congestion related problems in ethereum in a very elegant manner, acting as something as a dynamic reserve price. But in times very large congestion, the mechanism still reverts back a first price auction. This ["emergency back-up first price auction"](https://youtu.be/a9SB3uXR1qw?t=1604) is where the entirety of state contention in NFTs lives. 
+EIP-1559 solved many congestion related problems in ethereum in a very elegant manner, acting as something like a dynamic reserve price. But in times very large congestion, the mechanism still reverts back a first price auction. This ["emergency back-up first price auction"](https://youtu.be/a9SB3uXR1qw?t=1604) is where the entirety of state contention in NFTs lives. 
 
 ![roadmap](/img/eip1559.png)
 
