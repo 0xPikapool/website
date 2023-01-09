@@ -8,11 +8,11 @@ Maximal Extractable Value as a research space and problem area has been around f
 
 Often gas fees are overlooked as a type of MEV as compared to the more exotic variants such as [DEX arbitrage](https://eigenphi-1.gitbook.io/classroom/mev-types/arbitrage), [sandwiching](https://eigenphi-1.gitbook.io/classroom/mev-types/sandwich-mev), [liquidations](https://eigenphi-1.gitbook.io/classroom/mev-types/liquidation) etc. Because validators are able to decide the order of transactions, they control the NFT auction. Most will oblige to a first price auction of the gas price/priority fee, but even then they can decide to include mint txns after the mint is over. These will obviously fail and is one example of ways in which value is extracted from the user. 
 
-One exmaple of recent payouts can be seen by checking out the `MEV Block Reward` for the [blocks around this recent mint](https://beaconcha.in/slot/5055601#overview). You will see over the course of the mint `163 + 140 + 125 + 82 + 28 + 4.5 + 4.5 = 547 Eth` are given as rewards to the validator. And towards the end of the mint, there are many failed transactions included here. 
+One example of recent payouts can be seen by checking out the `MEV Block Reward` for the [blocks around this recent mint](https://beaconcha.in/slot/5055601#overview). You will see over the course of the mint `163 + 140 + 125 + 82 + 28 + 4.5 + 4.5 = 547 Eth` are given as rewards to the validator. And towards the end of the mint, there are many failed transactions included here. 
 
 ### Negative Externalities
 
-Failed transactions aren't the only negative externaility caused by this type of MEV, superlinear increases in base fees are also a by-product. This is of course [good for eth holders](https://ultrasound.money/), but from an NFT projects perspective it is essentially handing over the distribution of your hard work to the hands of validators. Participants are left with only one possible bidding strategy: to monitor the mempool and keep increasing your bid via the tip/priority fee. This gives those with advanced infrastrucutre a leg up, mimicing something like HFT in NFT mints.
+Failed transactions aren't the only negative externaility caused by this type of MEV, superlinear increases in base fees are also a by-product. This is of course [good for eth holders](https://ultrasound.money/), but from an NFT projects perspective it is essentially handing over the distribution of your hard work to the hands of validators. Participants are left with only one possible bidding strategy: to monitor the mempool and keep increasing your bid via the tip/priority fee. This gives those with advanced infrastrucutre a leg up, mimicking something like HFT in NFT mints.
 
 ### Smart Contract Approaches
 
