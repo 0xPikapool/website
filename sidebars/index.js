@@ -17,6 +17,10 @@ module.exports = {
         },
         {
           type: 'doc',
+          id: 'welcome/on-nft-mev',
+        },
+        {
+          type: 'doc',
           id: 'welcome/why-pikapool',
         },
         {
