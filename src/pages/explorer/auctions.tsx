@@ -9,7 +9,7 @@ import ReactPaginate from "react-paginate";
 import Loading from "@site/src/components/Loading";
 
 export default function Auctions(): JSX.Element {
-  if (!ExecutionEnvironment.canUseDOM) return <p>Loading...</p>;
+  if (!ExecutionEnvironment.canUseDOM) return <Loading />;
 
   return (
     <div
