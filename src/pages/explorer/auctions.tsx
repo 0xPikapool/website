@@ -6,6 +6,7 @@ import AuctionsTable from "../../components/auctions-table";
 import { Auction } from "@site/src/__generated__/graphql";
 import { useQueryPollingWhileWindowFocused } from "@site/src/hooks/useQueryPollingWhileWindowFocused";
 import ReactPaginate from "react-paginate";
+import Loading from "@site/src/components/Loading";
 
 export default function Auctions(): JSX.Element {
   if (!ExecutionEnvironment.canUseDOM) return <p>Loading...</p>;
@@ -81,7 +82,7 @@ function PaginatedAuctions({
           activeClassName="active"
         />
         {queryResult.loading ? (
-          <>Loading...</>
+          <Loading />
         ) : (
           <AuctionsTable auctions={currentItems} showName={true} />
         )}

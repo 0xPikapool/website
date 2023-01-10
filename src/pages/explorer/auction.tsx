@@ -8,12 +8,13 @@ import BidsTable from "@site/src/components/bids-table";
 import { stringToHexBuffer } from "@site/src/utils";
 import { useQueryPollingWhileWindowFocused } from "@site/src/hooks/useQueryPollingWhileWindowFocused";
 import ReactPaginate from "react-paginate";
+import Loading from "@site/src/components/Loading";
 
 export default function AuctionPage(props: {
   name: string;
   address: string;
 }): JSX.Element {
-  if (!ExecutionEnvironment.canUseDOM) return <p>Loading...</p>;
+  if (!ExecutionEnvironment.canUseDOM) return <Loading />;
 
   const { name, address } = props;
   const auctionQueryResult = useQuery(GET_AUCTION, {
@@ -28,7 +29,7 @@ export default function AuctionPage(props: {
   });
 
   const { data, loading, error } = auctionQueryResult;
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
   if (data) {
     const auction = data.auctionByAddressAndName as Auction;
     return (
@@ -139,7 +140,7 @@ function PaginatedAuctionBids({
           activeClassName="active"
         />
         {queryResult.loading ? (
-          <>Loading...</>
+          <Loading />
         ) : (
           <>
             <BidsTable bids={currentBids} chainId={auction.chainId} />

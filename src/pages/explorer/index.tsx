@@ -24,6 +24,7 @@ import {
 } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import { InjectedConnector } from "wagmi/connectors/injected";
+import Loading from "@site/src/components/Loading";
 
 const hashes = require("../../__generated__/client.json");
 const persistedLink = createPersistedQueryLink({
@@ -53,7 +54,7 @@ const apolloClient = new ApolloClient({
 
 export default function Explorer(): JSX.Element {
   const history = useHistory();
-  if (apolloClient === null) return <p>Loading...</p>;
+  if (apolloClient === null) return <Loading />;
 
   let inner = <AuctionsPage />;
   if (history.location.search.startsWith("?auction=")) {
