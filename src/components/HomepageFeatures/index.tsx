@@ -12,14 +12,14 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: "bleeding edge",
-    imgSrc: "/img/nft_mempool.png",
+    imgSrc: "/img/nft_mempool.jpg",
     description: (
       <>The mempool built for NFT’s... a shocking development for the space.</>
     ),
   },
   {
     title: "mev centric",
-    imgSrc: "/img/polka_sniper.png",
+    imgSrc: "/img/polka_sniper.jpg",
     description: (
       <>
         Currently built for snipers (pew pew) but building for NFT projects
@@ -29,7 +29,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "solving real problems",
-    imgSrc: "/img/pika_bills.png",
+    imgSrc: "/img/pika_bills.jpg",
     description: (
       <>
         You built the hype, you get the auction proceeds! Can I hear a bid from

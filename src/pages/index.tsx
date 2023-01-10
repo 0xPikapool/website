@@ -33,7 +33,7 @@ function HomepageHeader() {
       </div>
       <div className="container" style={{ width: "auto" }}>
         <img
-          src={"/img/pikapool.png"}
+          src={"/img/pikapool.jpg"}
           style={{ width: "440px", objectFit: "cover" }}
         />
       </div>

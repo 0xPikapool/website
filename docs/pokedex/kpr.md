@@ -5,7 +5,7 @@ description: A breakdown of the KPR Mint
 # KPR
 
 <centered style={{ display: "flex", justifyContent: "center", width: "100%"}}>
-  <img src="/img/pokedex-KPR.png" style={{maxWidth: "300px"}} />
+  <img src="/img/pokedex-KPR.jpg" style={{maxWidth: "300px"}} />
 </centered>
 
 ## Background
@@ -27,10 +27,10 @@ The KPR Mint had two parts, an Allow List mint then an Open mint.
 | 2,586       | 873          | 0.2124 ETH               | 3           | 5,035       | 517.2 ETH                |
 
 #### Average Gas Price per Block Surrounding the Mint
-![roadmap](/img/pokedex/kpr/kpr_surrounding.png)
+![roadmap](/img/pokedex/kpr/kpr_surrounding.jpg)
 
 #### Average Gas Price per Block - Mint Blocks Removed
-![roadmap](/img/pokedex/kpr/kpr_removed.png)
+![roadmap](/img/pokedex/kpr/kpr_removed.jpg)
 
 ### Allow List
 | NFTs Minted | Participants | Average Gas Cost per NFT | Block Range | Failed TX's | Gas Spent on Failed TX's |

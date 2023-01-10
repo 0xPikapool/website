@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/pikapool-sm.png',
+  favicon: 'img/pikapool-sm.jpg',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -61,12 +61,12 @@ const config = {
         disableSwitch: false,
         respectPrefersColorScheme: false,
       },
-      image: 'img/pikapool.png',
+      image: 'img/pikapool.jpg',
       navbar: {
         title: 'Pikapool',
         logo: {
           alt: 'Pikapool',
-          src: 'img/pikapool.png',
+          src: 'img/pikapool.jpg',
         },
         items: [
           { to: '/explorer', label: 'Explorer (Alpha)', position: 'left' },

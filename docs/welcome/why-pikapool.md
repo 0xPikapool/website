@@ -17,11 +17,11 @@ The switch to a public mint resulted in a surge in demand, selling out the remai
 
 The graph below shows average gas price per block surrounding the Catharsis mint.
 
-![Surrounding Mint](/img/why_pikapool/catharsis_surrounding.png)
+![Surrounding Mint](/img/why_pikapool/catharsis_surrounding.jpg)
 
 Here's the same graph, but the blocks containing a mint have been removed.
 
-![Surrounding Mint](/img/why_pikapool/catharsis_removed.png)
+![Surrounding Mint](/img/why_pikapool/catharsis_removed.jpg)
 
 It's clear that the spike in gas is a direct response to the NFT mint, but none of that additional gas went to GM.Studio or Dario Lanza (the artist behind Catharsis). Instead, most of it went to 
 0xea674fdde714fd979de3edf0f56aa9716b898ec8, a validator maintained by Ethermine.

@@ -3,7 +3,7 @@
 ## State of NFT Value Accrual
 NFT projects normally make money through either their direct mint or royalties on the secondary market. With recent trends around ignoring royalty payments [1](https://www.coindesk.com/web3/2022/11/04/retract-royalties-reduce-revenue-nft-creators-are-suffering-and-so-are-marketplaces/), one of the two primary revenue drivers for projects are in jeopardy. Of the top 5,000 most traded NFT's on Opensea, an average of 78% of lifetime revenue comes from minting fees.
 
-![Royalties vs. Mint Revenue](/img/royalty-revenue.png)
+![Royalties vs. Mint Revenue](/img/royalty-revenue.jpg)
 
 If you want to make money, you *need* to maximize your mint revenue.
 
