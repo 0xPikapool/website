@@ -15,4 +15,4 @@ Powerered by bleeding edge meta-transactions and bundles.
 
 Stay tuned.
 
-![Pikapool Lake](./lake.png)
+![Pikapool Lake](./lake.jpg)
