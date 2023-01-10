@@ -6,9 +6,10 @@ import { Bid } from "@site/src/__generated__/graphql";
 import BidVerbose from "@site/src/components/bid-verbose";
 import { useQueryPollingWhileWindowFocused } from "@site/src/hooks/useQueryPollingWhileWindowFocused";
 import { stringToHexBuffer } from "../../utils";
+import Loading from "@site/src/components/Loading";
 
 export default function BidPage(props: { id: string }): JSX.Element {
-  if (!ExecutionEnvironment.canUseDOM) return <p>Loading...</p>;
+  if (!ExecutionEnvironment.canUseDOM) return <Loading />;
   const queryResult = useQuery(GET_BID, {
     variables: { bidId: stringToHexBuffer(props.id) },
   });
@@ -30,7 +31,7 @@ export default function BidPage(props: { id: string }): JSX.Element {
     );
   }
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
   if (error)
     return (
       <>
