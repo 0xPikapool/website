@@ -171,3 +171,22 @@ h1, h2, h3, .navbar__title {
   --bs-pagination-font-size: 0.875rem;
   --bs-pagination-border-radius: 0.25rem;
 }
+
+/* Auction Started Wordart */
+#auction-started-wordart {
+  position: fixed;
+  animation: blink 1s linear infinite;
+  z-index: 100;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

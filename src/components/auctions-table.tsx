@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Auction } from "@site/src/__generated__/graphql";
 import Link from "@docusaurus/Link";
 import {
@@ -7,9 +7,9 @@ import {
   getAuctionId,
   hexBufferToString,
 } from "@site/src/utils";
-import { useBlockNumber } from "wagmi";
+import useBlockNumbers from "../hooks/useBlockNumbers";
 
-interface BlockNumbers {
+export interface BlockNumbers {
   1: { data: number | undefined; isLoading: boolean; error: Error | null };
   5: { data: number | undefined; isLoading: boolean; error: Error | null };
 }
@@ -17,37 +17,46 @@ interface BlockNumbers {
 function getAuctionStatus(
   auction: Auction,
   blockNumbers: BlockNumbers
-): string {
+): ReactElement {
   if (
     !blockNumbers[auction.chainId] ||
     blockNumbers[auction.chainId].isLoading
   ) {
-    return "Thinking...";
+    return <>Thinking...</>;
   }
 
   if (blockNumbers[auction.chainId].error) {
-    return "Error";
+    return <>Error</>;
   }
 
   const blockNumber = blockNumbers[auction.chainId].data;
-  if (Number(auction.bidStartBlock) > blockNumber) {
-    return "Starting soon";
-  } else if (blockNumber > Number(auction.mintStartBlock)) {
-    return "Closed";
+
+  const bidStartDiff = Number(auction.bidStartBlock) - Number(blockNumber);
+  const mintStartDiff = Number(auction.mintStartBlock) - Number(blockNumber);
+  if (Number(auction.bidStartBlock) > Number(blockNumber)) {
+    if (bidStartDiff > 1) {
+      return <>Starting in {bidStartDiff} blocks...</>;
+    } else {
+      return (
+        <div style={{ height: "auto", width: "8rem" }}>
+          <img
+            src="/img/auction_about_to_start_pikachu.gif"
+            alt="About to start"
+          />
+        </div>
+      );
+    }
+  } else if (Number(blockNumber) > Number(auction.mintStartBlock)) {
+    return <>Closed</>;
   }
-  return "Open";
+  return <>Open</>;
 }
 
 export default function AuctionsTable(props: {
   auctions: Auction[];
   showName: boolean;
 }): JSX.Element {
-  const blockNumbers = {
-    1: useBlockNumber({ chainId: 1 }),
-    5: useBlockNumber({ chainId: 5 }),
-  } as BlockNumbers;
-
-  console.log(blockNumbers);
+  const blockNumbers = useBlockNumbers();
 
   return (
     <>
