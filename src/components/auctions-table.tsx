@@ -50,11 +50,7 @@ function getAuctionStatus(
   } else if (Number(blockNumber) > Number(auction.mintStartBlock)) {
     return <>Closed</>;
   }
-  return (
-    <span>
-      Closes in {mintStartDiff} block{mintStartDiff > 1 ? "s" : ""}
-    </span>
-  );
+  return <>Open</>;
 }
 
 export default function AuctionsTable(props: {
