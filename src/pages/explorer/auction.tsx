@@ -9,26 +9,46 @@ import { stringToHexBuffer } from "@site/src/utils";
 import { useQueryPollingWhileWindowFocused } from "@site/src/hooks/useQueryPollingWhileWindowFocused";
 import ReactPaginate from "react-paginate";
 import Loading from "@site/src/components/Loading";
+import useBlockNumbers from "@site/src/hooks/useBlockNumbers";
+import { useReward } from "react-rewards";
 
 export default function AuctionPage(props: {
   name: string;
   address: string;
 }): JSX.Element {
   if (!ExecutionEnvironment.canUseDOM) return <Loading />;
-
   const { name, address } = props;
+  const blockNumbers = useBlockNumbers();
   const auctionQueryResult = useQuery(GET_AUCTION, {
     variables: {
       address: stringToHexBuffer(address),
       name,
     },
   });
+  const { data, loading, error } = auctionQueryResult;
   useQueryPollingWhileWindowFocused({
     pollInterval: 1000,
     ...auctionQueryResult,
   });
 
-  const { data, loading, error } = auctionQueryResult;
+  const { reward, isAnimating } = useReward("rewardId", "emoji", {
+    emoji: ["⚡"],
+    lifetime: 500,
+    spread: 90,
+    elementCount: 500,
+    startVelocity: 70,
+  });
+
+  const auctionBidStartBlock = data?.auctionByAddressAndName?.bidStartBlock;
+  const auctionChainId = data?.auctionByAddressAndName?.chainId;
+  const auctionCurrentBlockNumber = blockNumbers[auctionChainId]?.data;
+  const wordartStyle = !isAnimating ? { display: "none" } : {};
+  // const wordartStyle = {};
+  useEffect(() => {
+    if (Number(auctionBidStartBlock) == Number(auctionCurrentBlockNumber))
+      reward();
+  }, [auctionBidStartBlock, auctionCurrentBlockNumber]);
+
   if (loading) return <Loading />;
   if (data) {
     const auction = data.auctionByAddressAndName as Auction;
@@ -42,6 +62,15 @@ export default function AuctionPage(props: {
       >
         <h1>{`${auction.name}`}</h1>
         <AuctionsTable auctions={[auction]} showName={false} />
+        <span
+          id="rewardId"
+          style={{
+            zIndex: 101,
+          }}
+        />
+        <div id="auction-started-wordart" style={wordartStyle}>
+          <img src={"/img/auction_started.png"} />
+        </div>
         <PaginatedAuctionBids
           name={props.name}
           address={props.address}
