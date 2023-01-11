@@ -34,18 +34,21 @@ function getAuctionStatus(
   const bidStartDiff = Number(auction.bidStartBlock) - Number(blockNumber);
   const mintStartDiff = Number(auction.mintStartBlock) - Number(blockNumber);
   if (Number(auction.bidStartBlock) > Number(blockNumber)) {
-    if (bidStartDiff > 1) {
-      return <>Starting in {bidStartDiff} blocks...</>;
-    } else {
-      return (
-        <div style={{ height: "auto", width: "8rem" }}>
-          <img
-            src="/img/auction_about_to_start_pikachu.gif"
-            alt="About to start"
-          />
-        </div>
-      );
-    }
+    return (
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <span>
+          Starting in {bidStartDiff} block{bidStartDiff > 1 ? "s..." : ""}
+        </span>
+        {bidStartDiff === 1 && (
+          <div style={{ height: "auto", width: "8rem" }}>
+            <img
+              src="/img/auction_about_to_start_pikachu.gif"
+              alt="About to start"
+            />
+          </div>
+        )}
+      </div>
+    );
   } else if (Number(blockNumber) > Number(auction.mintStartBlock)) {
     return <>Closed</>;
   }
