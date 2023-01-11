@@ -43,7 +43,6 @@ export default function AuctionPage(props: {
   const auctionChainId = data?.auctionByAddressAndName?.chainId;
   const auctionCurrentBlockNumber = blockNumbers[auctionChainId]?.data;
   const wordartStyle = !isAnimating ? { display: "none" } : {};
-  // const wordartStyle = {};
   useEffect(() => {
     if (Number(auctionBidStartBlock) == Number(auctionCurrentBlockNumber))
       reward();
