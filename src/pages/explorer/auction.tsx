@@ -35,8 +35,8 @@ export default function AuctionPage(props: {
     emoji: ["⚡"],
     lifetime: 500,
     spread: 90,
-    elementCount: 500,
-    startVelocity: 70,
+    elementCount: 300,
+    startVelocity: 60,
   });
 
   const auctionBidStartBlock = data?.auctionByAddressAndName?.bidStartBlock;
