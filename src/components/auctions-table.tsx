@@ -1,7 +1,6 @@
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement } from "react";
 import { Auction } from "@site/src/__generated__/graphql";
 import Link from "@docusaurus/Link";
-import { useReward } from "react-rewards";
 import {
   createEtherscanUrl,
   displayEth,
