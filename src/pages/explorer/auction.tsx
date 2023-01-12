@@ -11,6 +11,7 @@ import ReactPaginate from "react-paginate";
 import Loading from "@site/src/components/Loading";
 import useBlockNumbers from "@site/src/hooks/useBlockNumbers";
 import { useReward } from "react-rewards";
+import NotFound from "@site/src/components/404";
 
 export default function AuctionPage(props: {
   name: string;
@@ -49,7 +50,7 @@ export default function AuctionPage(props: {
   }, [auctionBidStartBlock, auctionCurrentBlockNumber]);
 
   if (loading) return <Loading />;
-  if (data) {
+  if (data?.auctionByAddressAndName) {
     const auction = data.auctionByAddressAndName as Auction;
     return (
       <div
@@ -85,6 +86,8 @@ export default function AuctionPage(props: {
         <p>{JSON.stringify(error)}</p>
       </>
     );
+
+  return <NotFound what={"Auction"} id={`(${name}, ${address})`} />;
 }
 
 function PaginatedAuctionBids({

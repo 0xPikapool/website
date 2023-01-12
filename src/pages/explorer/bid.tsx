@@ -7,6 +7,7 @@ import BidVerbose from "@site/src/components/bid-verbose";
 import { useQueryPollingWhileWindowFocused } from "@site/src/hooks/useQueryPollingWhileWindowFocused";
 import { stringToHexBuffer } from "../../utils";
 import Loading from "@site/src/components/Loading";
+import NotFound from "@site/src/components/404";
 
 export default function BidPage(props: { id: string }): JSX.Element {
   if (!ExecutionEnvironment.canUseDOM) return <Loading />;
@@ -16,7 +17,7 @@ export default function BidPage(props: { id: string }): JSX.Element {
   useQueryPollingWhileWindowFocused({ pollInterval: 1000, ...queryResult });
 
   const { loading, error, data } = queryResult;
-  if (data) {
+  if (data?.bidByBidId) {
     const bid = data.bidByBidId as Bid;
     return (
       <div
@@ -39,4 +40,6 @@ export default function BidPage(props: { id: string }): JSX.Element {
         <p>{JSON.stringify(error)}</p>
       </>
     );
+
+  return <NotFound what={"Bid"} id={props.id} />;
 }
