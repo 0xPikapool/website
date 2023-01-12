@@ -32,7 +32,6 @@ function getAuctionStatus(
   const blockNumber = blockNumbers[auction.chainId].data;
 
   const bidStartDiff = Number(auction.bidStartBlock) - Number(blockNumber);
-  const mintStartDiff = Number(auction.mintStartBlock) - Number(blockNumber);
   if (Number(auction.bidStartBlock) > Number(blockNumber)) {
     return (
       <div style={{ display: "flex", flexDirection: "column" }}>
