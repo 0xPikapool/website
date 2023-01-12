@@ -1,4 +1,10 @@
-# Website 
+# pikapool.cool
+
+
+<p align="center">
+  <img src="static/img/pikapool.jpg" alt="drawing" width="200"/>
+</p>
+<p align="center">Welcome to Pallet Town 🏠</p>
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
@@ -26,4 +32,4 @@ This command generates static content into the `build` directory and can be serv
 
 ### server-persisted-operations.json
 
-The Explorer GraphQL Server must implement these [persisted operations](https://www.apollographql.com/docs/react/api/link/persisted-queries/) and should enforce that no other queries can be called, to prevent abuse.
+The Explorer GraphQL Server must implement these [persisted operations](https://www.apollographql.com/docs/react/api/link/persisted-queries/).
