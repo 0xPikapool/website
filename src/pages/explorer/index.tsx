@@ -23,7 +23,6 @@ import {
   WagmiConfig,
 } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
-import { InjectedConnector } from "wagmi/connectors/injected";
 import Loading from "@site/src/components/Loading";
 
 const hashes = require("../../__generated__/client.json");
@@ -40,7 +39,6 @@ const { chains, provider } = configureChains(
 
 const wagmiClient = createClient({
   autoConnect: true,
-  // connectors: [new InjectedProvider({ chains })],
   provider,
 });
 
