@@ -42,7 +42,9 @@ export default function BidsTable(props: {
                 <td>{<Link to={bidUrl}>{truncatedBidId}</Link>}</td>
                 <td>{<Link to={etherscanUrl}>{truncatedAddress}</Link>}</td>
                 <td>{bid.submittedTimestamp}</td>
-                <td>{bid.tipRevealed ? bid.tipRevealed : "Hidden"}</td>
+                <td>
+                  {bid.tipRevealed ? displayEth(bid.tipRevealed) : "Hidden"}
+                </td>
                 <td>{bid.amount}</td>
                 <td>{bid.status}</td>
               </tr>
