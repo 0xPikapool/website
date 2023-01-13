@@ -100,6 +100,11 @@ module.exports = {
           label: 'TypeScript SDK',
           href: 'https://github.com/0xPikapool/typescript-sdk',
         },
+        {
+          type: 'link',
+          label: 'React Demo',
+          href: 'https://github.com/0xPikapool/react-demo',
+        },
       ],
     },
   ],
