@@ -45,10 +45,10 @@ module.exports = {
         {
           type: 'doc',
           id: 'pokedex/kpr',
-        },{
+        }, {
           type: 'doc',
           id: 'pokedex/otherdeed',
-        },{
+        }, {
           type: 'doc',
           id: 'pokedex/vaynersports-pass',
         },
@@ -96,16 +96,9 @@ module.exports = {
           id: 'builders/grant-minter-role',
         },
         {
-          type: 'doc',
-          id: 'builders/typescript-sdk',
-        },
-        {
-          type: 'doc',
-          id: 'builders/react-demo',
-        },
-        {
-          type: 'doc',
-          id: 'builders/rpc',
+          type: 'link',
+          label: 'TypeScript SDK',
+          href: 'https://github.com/0xPikapool/typescript-sdk',
         },
       ],
     },
