@@ -1,7 +1,7 @@
 ---
 slug: testing
 title: Testing, testing
-authors: [ash, braixen, crasher, khepri]
+authors: [ash, arceus, crasher, viola]
 tags: [testing, nft, mempool]
 ---
 
