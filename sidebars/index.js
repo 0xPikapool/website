@@ -92,8 +92,25 @@ module.exports = {
           id: 'builders/overview',
         },
         {
-          type: 'doc',
-          id: 'builders/grant-minter-role',
+          type: 'category',
+          label: 'Smart contracts',
+          items: [
+            {
+              type: 'doc',
+              id: 'builders/smart-contracts/Settlement',
+            },
+            {
+              type: 'doc',
+              id: 'builders/smart-contracts/BidSignatures',
+            },
+            {
+              type: 'doc',
+              id: 'builders/smart-contracts/Example721A',
+            },{
+              type: 'doc',
+              id: 'builders/smart-contracts/Pikapatible',
+            }
+          ]
         },
         {
           type: 'link',
@@ -104,6 +121,11 @@ module.exports = {
           type: 'link',
           label: 'React Demo',
           href: 'https://github.com/0xPikapool/react-demo',
+        },
+        {
+          type: 'link',
+          label: 'Smart Contracts',
+          href: 'https://github.com/0xPikapool/contracts',
         },
       ],
     },
