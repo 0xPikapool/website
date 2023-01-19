@@ -3,7 +3,7 @@
 Augmenting your mint experience with pikapool can give it electrifying super powers:
 
 1. **Gasless bidding experience** - simplify the bidding process, users don't even need to spend gas.
-2. **Increased Mint Revenue** - increasing mint revenues and decrease negative effects from public gas wars. For more information, check out the [Pokedex](../pokedex/).
+2. **Increased Mint Revenue** - increasing mint revenues and decrease negative effects from public gas wars. For more information, check out the [analyses in our Pokedex](../pokedex/kpr.md).
 
 ## Future 
 
