@@ -2,7 +2,7 @@
 [Git Source](https://github.com/0xPikapool/contracts/blob/37fc19120d4e886f816d210c3eaf53f1af03f4b6/src/Settlement.sol)
 
 **Inherits:**
-[BidSignatures](/src/utils/BidSignatures.sol/contract.BidSignatures.md)
+[BidSignatures](./BidSignatures.md)
 
 **Author:**
 0xViola and PikaPool Developers
