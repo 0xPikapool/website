@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_AUCTION, GET_AUCTION_BIDS } from "../../queries";
 import AuctionsTable from "../../components/auctions-table";
-import { Auction, Bid } from "@site/src/__generated__/graphql";
+import { Auction, Bid, BidsOrderBy } from "@site/src/__generated__/graphql";
 import BidsTable from "@site/src/components/bids-table";
 import { stringToHexBuffer } from "@site/src/utils";
 import { useQueryPollingWhileWindowFocused } from "@site/src/hooks/useQueryPollingWhileWindowFocused";
@@ -118,6 +118,7 @@ function PaginatedAuctionBids({
       address: stringToHexBuffer(address),
       name,
       offset: itemOffset,
+      orderBy: BidsOrderBy.SubmittedTimestampDesc,
     },
   });
   useQueryPollingWhileWindowFocused({

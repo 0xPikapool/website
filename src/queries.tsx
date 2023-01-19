@@ -38,11 +38,24 @@ export const GET_AUCTION = gql(`
   }
 `);
 
+export const GET_AUCTION_UNSETTLED_BIDS_COUNT = gql(`
+  query GetAuctionUnsettledBidsCount($address: String!, $name: String!) {
+    auctionByAddressAndName(
+      name: $name,
+      address: $address
+    ) {
+      bidsByAuctionAddressAndAuctionName(condition: {status: SUBMITTED}) {
+        totalCount
+      }
+    }
+  }
+`);
+
 export const GET_AUCTION_BIDS = gql(`
-  query GetAuctionBids($address: String!, $name: String!, $offset: Int!) {
+  query GetAuctionBids($address: String!, $name: String!, $offset: Int!, $orderBy: [BidsOrderBy!]) {
     auctionByAddressAndName(address: $address, name: $name) {
       chainId
-      bidsByAuctionAddressAndAuctionName(first: 10, offset: $offset, orderBy: SUBMITTED_TIMESTAMP_DESC) {
+      bidsByAuctionAddressAndAuctionName(first: 10, offset: $offset, orderBy: $orderBy) {
         nodes {
           bidId
           signer
