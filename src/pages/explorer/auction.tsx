@@ -104,6 +104,7 @@ function PaginatedAuctionBids({
   const [itemOffset, setItemOffset] = useState(0);
   const [shouldPoll, setShouldPoll] = useState(true);
   const [lastTotalBids, setLastTotalBids] = useState(0);
+  const [orderBy, setOrderBy] = useState(BidsOrderBy.SubmittedTimestampDesc);
 
   useEffect(() => {
     // If we're on the first page, we want to poll.
@@ -118,7 +119,7 @@ function PaginatedAuctionBids({
       address: stringToHexBuffer(address),
       name,
       offset: itemOffset,
-      orderBy: BidsOrderBy.SubmittedTimestampDesc,
+      orderBy: orderBy
     },
   });
   useQueryPollingWhileWindowFocused({
@@ -137,11 +138,19 @@ function PaginatedAuctionBids({
     const currentBids = (auction?.bidsByAuctionAddressAndAuctionName?.nodes ||
       []) as Bid[];
     const pageCount = Math.ceil(lastTotalBids / bidsPerPage);
+
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
       const newOffset = (event.selected * bidsPerPage) % lastTotalBids;
       setItemOffset(newOffset);
     };
+
+    const handleSortBy = (order) => {
+      const newSortOrder: BidsOrderBy = order;
+      setOrderBy(newSortOrder);
+      console.log(order)
+    }
+
     return (
       <div
         style={{
@@ -171,6 +180,17 @@ function PaginatedAuctionBids({
           containerClassName="pagination"
           activeClassName="active"
         />
+        <div
+          style={{
+            flexDirection: "column",
+            minHeight: "2rem",
+            alignItems: "center",
+          }}>Sort By:&nbsp;
+          <select onChange={(e) => handleSortBy(e.target.value)}>
+            <option value={BidsOrderBy.SubmittedTimestampDesc}>Timestamp</option>
+            <option value={BidsOrderBy.StatusDesc}>Revealed Fee</option>
+          </select>
+        </div>
         {queryResult.loading ? (
           <Loading />
         ) : (

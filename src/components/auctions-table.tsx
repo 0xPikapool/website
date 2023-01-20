@@ -37,6 +37,7 @@ function getAuctionStatus(
 
   const [shouldPoll, setShouldPoll] = useState(false);
 
+  // add polling later
   // useEffect(() => {
   //   // Poll only if most recent auction is settling
   //   setShouldPoll(queryResult.data);
@@ -56,7 +57,7 @@ function getAuctionStatus(
 
   let submitted: Number;
   if (queryResult.data) {
-    submitted = queryResult?.data?.totalCount;
+    submitted = queryResult?.data?.auctionByAddressAndName?.bidsByAuctionAddressAndAuctionName?.totalCount;
   }
 
   if (Number(auction.bidStartBlock) > Number(blockNumber)) {
