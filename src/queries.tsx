@@ -41,8 +41,8 @@ export const GET_AUCTION = gql(`
 export const GET_AUCTION_UNSETTLED_BIDS_COUNT = gql(`
   query GetAuctionUnsettledBidsCount($address: String!, $name: String!) {
     auctionByAddressAndName(
-      name: $name,
-      address: $address
+      address: $address,
+      name: $name
     ) {
       bidsByAuctionAddressAndAuctionName(condition: {status: SUBMITTED}) {
         totalCount
