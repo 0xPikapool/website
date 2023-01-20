@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState, useEffect } from "react";
 import { Auction } from "@site/src/__generated__/graphql";
 import Link from "@docusaurus/Link";
 import {
@@ -8,6 +8,9 @@ import {
   hexBufferToString,
 } from "@site/src/utils";
 import useBlockNumbers from "../hooks/useBlockNumbers";
+import { useQuery } from "@apollo/client";
+import { GET_AUCTION_UNSETTLED_BIDS_COUNT } from "../queries";
+import { useQueryPollingWhileWindowFocused } from "@site/src/hooks/useQueryPollingWhileWindowFocused";
 
 export interface BlockNumbers {
   1: { data: number | undefined; isLoading: boolean; error: Error | null };
@@ -30,8 +33,32 @@ function getAuctionStatus(
   }
 
   const blockNumber = blockNumbers[auction.chainId].data;
-
   const bidStartDiff = Number(auction.bidStartBlock) - Number(blockNumber);
+
+  const [shouldPoll, setShouldPoll] = useState(false);
+
+  // useEffect(() => {
+  //   // Poll only if most recent auction is settling
+  //   setShouldPoll(queryResult.data);
+  // }, [queryResult.data]);
+
+  // Fetch the items to display on the current page.
+  const queryResult = useQuery(GET_AUCTION_UNSETTLED_BIDS_COUNT, {
+    variables: {
+      address: auction.address,
+      name: auction.name
+    },
+  });
+  useQueryPollingWhileWindowFocused({
+    pollInterval: shouldPoll ? 1000 : 0,
+    ...queryResult,
+  });
+
+  let submitted: Number;
+  if (queryResult.data) {
+    submitted = queryResult?.data?.totalCount;
+  }
+
   if (Number(auction.bidStartBlock) > Number(blockNumber)) {
     return (
       <div style={{ display: "flex", flexDirection: "column" }}>
@@ -48,8 +75,10 @@ function getAuctionStatus(
         )}
       </div>
     );
-  } else if (Number(blockNumber) > Number(auction.mintStartBlock)) {
-    return <>Closed</>;
+  } else if (Number(auction.bidStartBlock) < Number(blockNumber) && submitted) {
+    return <>{submitted} TXs pending...</>;
+  } else if (Number(auction.bidStartBlock) < Number(blockNumber) && !submitted) {
+    return <>Completed</>
   }
   return <>Open</>;
 }
