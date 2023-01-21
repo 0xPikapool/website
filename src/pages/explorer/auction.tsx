@@ -146,9 +146,7 @@ function PaginatedAuctionBids({
     };
 
     const handleSortBy = (order) => {
-      const newSortOrder: BidsOrderBy = order;
-      setOrderBy(newSortOrder);
-      console.log(order)
+      setOrderBy(order);
     }
 
     return (

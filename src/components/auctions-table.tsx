@@ -21,6 +21,7 @@ function getAuctionStatus(
   auction: Auction,
   blockNumbers: BlockNumbers
 ): ReactElement {
+  const [shouldPoll, setShouldPoll] = useState(false);
   if (
     !blockNumbers[auction.chainId] ||
     blockNumbers[auction.chainId].isLoading
@@ -35,14 +36,6 @@ function getAuctionStatus(
   const blockNumber = blockNumbers[auction.chainId].data;
   const bidStartDiff = Number(auction.bidStartBlock) - Number(blockNumber);
 
-  const [shouldPoll, setShouldPoll] = useState(false);
-
-  // add polling later
-  // useEffect(() => {
-  //   // Poll only if most recent auction is settling
-  //   setShouldPoll(queryResult.data);
-  // }, [queryResult.data]);
-
   // Fetch the items to display on the current page.
   const queryResult = useQuery(GET_AUCTION_UNSETTLED_BIDS_COUNT, {
     variables: {
@@ -55,9 +48,11 @@ function getAuctionStatus(
     ...queryResult,
   });
 
-  let submitted: Number;
-  if (queryResult.data) {
-    submitted = queryResult?.data?.auctionByAddressAndName?.bidsByAuctionAddressAndAuctionName?.totalCount;
+  const settling: Number = queryResult.data?.auctionByAddressAndName?.bidsByAuctionAddressAndAuctionName?.totalCount;
+  if (settling) {
+    setShouldPoll(true);
+  } else {
+    // setShouldPoll(false);
   }
 
   if (Number(auction.bidStartBlock) > Number(blockNumber)) {
@@ -76,10 +71,10 @@ function getAuctionStatus(
         )}
       </div>
     );
-  } else if (Number(auction.bidStartBlock) < Number(blockNumber) && submitted) {
-    return <>{submitted} TXs pending...</>;
-  } else if (Number(auction.bidStartBlock) < Number(blockNumber) && !submitted) {
-    return <>Completed</>
+  } else if (bidStartDiff <= 0 && settling) {
+    return <>Settling...</>;
+  } else if (bidStartDiff <= 0 && !settling) {
+    return <>Completed</>;
   }
   return <>Open</>;
 }
