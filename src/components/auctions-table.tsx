@@ -21,7 +21,6 @@ function getAuctionStatus(
   auction: Auction,
   blockNumbers: BlockNumbers
 ): ReactElement {
-  const [shouldPoll, setShouldPoll] = useState(false);
   if (
     !blockNumbers[auction.chainId] ||
     blockNumbers[auction.chainId].isLoading
@@ -44,16 +43,11 @@ function getAuctionStatus(
     },
   });
   useQueryPollingWhileWindowFocused({
-    pollInterval: shouldPoll ? 1000 : 0,
+    pollInterval: 1000,
     ...queryResult,
   });
 
   const settling: Number = queryResult.data?.auctionByAddressAndName?.bidsByAuctionAddressAndAuctionName?.totalCount;
-  if (settling) {
-    setShouldPoll(true);
-  } else {
-    // setShouldPoll(false);
-  }
 
   if (Number(auction.bidStartBlock) > Number(blockNumber)) {
     return (
