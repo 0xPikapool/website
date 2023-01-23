@@ -47,7 +47,7 @@ function getAuctionStatus(
     ...queryResult,
   });
 
-  const settling: Number = queryResult.data?.auctionByAddressAndName?.bidsByAuctionAddressAndAuctionName?.totalCount;
+  const settling: boolean = Boolean(queryResult.data?.auctionByAddressAndName?.bidsByAuctionAddressAndAuctionName?.totalCount);
 
   if (Number(auction.bidStartBlock) > Number(blockNumber)) {
     return (

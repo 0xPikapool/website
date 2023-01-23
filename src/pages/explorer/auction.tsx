@@ -139,15 +139,18 @@ function PaginatedAuctionBids({
       []) as Bid[];
     const pageCount = Math.ceil(lastTotalBids / bidsPerPage);
 
+    // check for revealed tips
+    let checkRevealed: boolean;
+    for (let bid of currentBids) {
+      if (checkRevealed) break;
+      bid.tipRevealed ? checkRevealed = true : '';
+    }
+
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
       const newOffset = (event.selected * bidsPerPage) % lastTotalBids;
       setItemOffset(newOffset);
     };
-
-    const handleSortBy = (order) => {
-      setOrderBy(order);
-    }
 
     return (
       <div
@@ -158,7 +161,33 @@ function PaginatedAuctionBids({
           alignItems: "center",
         }}
       >
-        <div className="hero__subtitle">{`Latest Bids`}</div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center"
+          }}
+        >
+          <div className="hero__subtitle">{`Latest Bids`}</div>
+          {
+            checkRevealed && (
+              <div
+                style={{
+                  position: "absolute",
+                  marginLeft: "12rem",
+                  fontSize: "12px"
+                }}>
+                  Sort By:&nbsp;
+                <select 
+                  style={{fontSize: "10px"}}
+                  onChange={(e) => setOrderBy(e.target.value as BidsOrderBy)}
+                >
+                  <option value={BidsOrderBy.SubmittedTimestampDesc}>Timestamp</option>
+                  <option value={BidsOrderBy.StatusDesc}>Revealed Fee</option>
+                </select>
+              </div>
+            )
+          }
+        </div>
         <ReactPaginate
           onPageChange={handlePageClick}
           previousLabel="Previous"
@@ -178,17 +207,6 @@ function PaginatedAuctionBids({
           containerClassName="pagination"
           activeClassName="active"
         />
-        <div
-          style={{
-            flexDirection: "column",
-            minHeight: "2rem",
-            alignItems: "center",
-          }}>Sort By:&nbsp;
-          <select onChange={(e) => handleSortBy(e.target.value)}>
-            <option value={BidsOrderBy.SubmittedTimestampDesc}>Timestamp</option>
-            <option value={BidsOrderBy.StatusDesc}>Revealed Fee</option>
-          </select>
-        </div>
         {queryResult.loading ? (
           <Loading />
         ) : (
