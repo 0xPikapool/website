@@ -174,15 +174,15 @@ function PaginatedAuctionBids({
                 style={{
                   position: "absolute",
                   marginLeft: "12rem",
-                  fontSize: "12px"
                 }}>
+                  fontSize: "12px"
                   Sort By:&nbsp;
                 <select 
                   style={{fontSize: "10px"}}
                   onChange={(e) => setOrderBy(e.target.value as BidsOrderBy)}
                 >
-                  <option value={BidsOrderBy.SubmittedTimestampDesc}>Timestamp</option>
-                  <option value={BidsOrderBy.StatusDesc}>Revealed Fee</option>
+                  <option value={BidsOrderBy.SubmittedTimestampDesc}>Submitted Timestamp</option>
+                  <option value={BidsOrderBy.StatusDesc}>Tip</option>
                 </select>
               </div>
             )
