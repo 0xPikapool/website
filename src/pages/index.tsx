@@ -33,7 +33,7 @@ function HomepageHeader() {
       <div className="container w-auto max-w-md xl:mr-44">
         <img
           src={"/img/pikapool.jpg"}
-          className="object-cover w-440"
+          className="object-cover w-440 rounded-xl shadow-2xl"
         />
       </div>
     </header>
