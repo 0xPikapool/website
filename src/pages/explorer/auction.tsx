@@ -174,8 +174,8 @@ function PaginatedAuctionBids({
                 style={{
                   position: "absolute",
                   marginLeft: "12rem",
-                }}>
                   fontSize: "12px"
+                }}>
                   Sort By:&nbsp;
                 <select 
                   style={{fontSize: "10px"}}
