@@ -61,10 +61,10 @@ export default function AuctionsTable(props: {
   const blockNumbers = useBlockNumbers();
 
   return (
-    <>
-      <table>
-        <thead>
-          <tr>
+    <div className="flex justify-center w-full">
+      <table className="table-auto overflow-x-auto text-[12px] sm:text-xs lg:text-sm xl:text-base 2xl:text-lg">
+        <thead className="table-header-group">
+          <tr className="table-row">
             <th>Chain ID</th>
             {props.showName ? <th>Name</th> : null}
             <th>Contract</th>
@@ -90,31 +90,31 @@ export default function AuctionsTable(props: {
               "address"
             );
             return (
-              <tr key={id}>
-                <td>{auction.chainId}</td>
+              <tr key={id} className="tracking-tighter">
+                <td className="hover:scale-125">{auction.chainId}</td>
                 {props.showName ? (
-                  <td>
+                  <td className="hover:scale-110">
                     {<Link to={`/explorer?auction=${id}`}>{auction.name}</Link>}
                   </td>
                 ) : null}
-                <td>
+                <td className="hover:scale-110">
                   {
                     <Link href={etherscanUrl} target="_blank">
                       {truncatedAddress}
                     </Link>
                   }
                 </td>
-                <td>{auction.maxUnits}</td>
-                <td>{displayEth(auction.price)}</td>
-                <td>{auction.bidStartBlock}</td>
-                <td>{auction.mintStartBlock}</td>
-                <td>{auction.bidsByAuctionAddressAndAuctionName.totalCount}</td>
-                <td>{getAuctionStatus(auction, blockNumbers)}</td>
+                <td className="hover:scale-125">{auction.maxUnits}</td>
+                <td className="hover:scale-125">{displayEth(auction.price)}</td>
+                <td className="hover:scale-125">{auction.bidStartBlock}</td>
+                <td className="hover:scale-125">{auction.mintStartBlock}</td>
+                <td className="hover:scale-125">{auction.bidsByAuctionAddressAndAuctionName.totalCount}</td>
+                <td className="hover:scale-125">{getAuctionStatus(auction, blockNumbers)}</td>
               </tr>
             );
           })}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }
