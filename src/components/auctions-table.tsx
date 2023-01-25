@@ -20,6 +20,14 @@ function getAuctionStatus(
   auction: Auction,
   blockNumbers: BlockNumbers
 ): ReactElement {
+    // Fetch the items to display on the current page.
+    const queryResult = useQuery(GET_AUCTION_UNSETTLED_BIDS_COUNT, {
+      variables: {
+        address: auction.address,
+        name: auction.name
+      },
+    });
+
   if (
     !blockNumbers[auction.chainId] ||
     blockNumbers[auction.chainId].isLoading
@@ -33,14 +41,6 @@ function getAuctionStatus(
 
   const blockNumber = blockNumbers[auction.chainId].data;
   const bidStartDiff = Number(auction.bidStartBlock) - Number(blockNumber);
-
-  // Fetch the items to display on the current page.
-  const queryResult = useQuery(GET_AUCTION_UNSETTLED_BIDS_COUNT, {
-    variables: {
-      address: auction.address,
-      name: auction.name
-    },
-  });
 
   const settling: boolean = Boolean(queryResult.data?.auctionByAddressAndName?.bidsByAuctionAddressAndAuctionName?.totalCount);
 
