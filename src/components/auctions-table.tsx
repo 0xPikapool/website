@@ -10,6 +10,7 @@ import {
 import useBlockNumbers from "../hooks/useBlockNumbers";
 import { useQuery } from "@apollo/client";
 import { GET_AUCTION_UNSETTLED_BIDS_COUNT } from "../queries";
+import { useQueryPollingWhileWindowFocused } from "../hooks/useQueryPollingWhileWindowFocused";
 
 export interface BlockNumbers {
   1: { data: number | undefined; isLoading: boolean; error: Error | null };
@@ -26,6 +27,10 @@ function getAuctionStatus(
         address: auction.address,
         name: auction.name
       },
+    });
+    useQueryPollingWhileWindowFocused({
+      pollInterval: 1000,
+      ...queryResult,
     });
 
   if (
