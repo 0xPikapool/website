@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_AUCTION, GET_AUCTION_BIDS } from "../../queries";
 import AuctionsTable from "../../components/auctions-table";
-import { Auction, Bid } from "@site/src/__generated__/graphql";
+import { Auction, Bid, BidsOrderBy } from "@site/src/__generated__/graphql";
 import BidsTable from "@site/src/components/bids-table";
 import { stringToHexBuffer } from "@site/src/utils";
 import { useQueryPollingWhileWindowFocused } from "@site/src/hooks/useQueryPollingWhileWindowFocused";
@@ -104,6 +104,7 @@ function PaginatedAuctionBids({
   const [itemOffset, setItemOffset] = useState(0);
   const [shouldPoll, setShouldPoll] = useState(true);
   const [lastTotalBids, setLastTotalBids] = useState(0);
+  const [orderBy, setOrderBy] = useState(BidsOrderBy.SubmittedTimestampDesc);
 
   useEffect(() => {
     // If we're on the first page, we want to poll.
@@ -118,6 +119,7 @@ function PaginatedAuctionBids({
       address: stringToHexBuffer(address),
       name,
       offset: itemOffset,
+      orderBy: orderBy
     },
   });
   useQueryPollingWhileWindowFocused({
@@ -136,11 +138,20 @@ function PaginatedAuctionBids({
     const currentBids = (auction?.bidsByAuctionAddressAndAuctionName?.nodes ||
       []) as Bid[];
     const pageCount = Math.ceil(lastTotalBids / bidsPerPage);
+
+    // check for revealed tips
+    let checkRevealed: boolean;
+    for (let bid of currentBids) {
+      if (checkRevealed) break;
+      bid.tipRevealed ? checkRevealed = true : '';
+    }
+
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
       const newOffset = (event.selected * bidsPerPage) % lastTotalBids;
       setItemOffset(newOffset);
     };
+
     return (
       <div
         style={{
@@ -150,7 +161,33 @@ function PaginatedAuctionBids({
           alignItems: "center",
         }}
       >
-        <div className="hero__subtitle">{`Latest Bids`}</div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center"
+          }}
+        >
+          <div className="hero__subtitle">{`Latest Bids`}</div>
+          {
+            checkRevealed && (
+              <div
+                style={{
+                  position: "absolute",
+                  marginLeft: "12rem",
+                  fontSize: "12px"
+                }}>
+                  Sort By:&nbsp;
+                <select 
+                  style={{fontSize: "10px"}}
+                  onChange={(e) => setOrderBy(e.target.value as BidsOrderBy)}
+                >
+                  <option value={BidsOrderBy.SubmittedTimestampDesc}>Submitted Timestamp</option>
+                  <option value={BidsOrderBy.StatusDesc}>Tip</option>
+                </select>
+              </div>
+            )
+          }
+        </div>
         <ReactPaginate
           onPageChange={handlePageClick}
           previousLabel="Previous"
