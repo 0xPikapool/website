@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect } from "react";
+import React, { ReactElement } from "react";
 import { Auction } from "@site/src/__generated__/graphql";
 import Link from "@docusaurus/Link";
 import {
@@ -21,6 +21,18 @@ function getAuctionStatus(
   auction: Auction,
   blockNumbers: BlockNumbers
 ): ReactElement {
+  // Fetch the items to display on the current page.
+  const queryResult = useQuery(GET_AUCTION_UNSETTLED_BIDS_COUNT, {
+    variables: {
+      address: auction.address,
+      name: auction.name
+    },
+  });
+  useQueryPollingWhileWindowFocused({
+    pollInterval: 1000,
+    ...queryResult,
+  });
+
   if (
     !blockNumbers[auction.chainId] ||
     blockNumbers[auction.chainId].isLoading
@@ -34,18 +46,6 @@ function getAuctionStatus(
 
   const blockNumber = blockNumbers[auction.chainId].data;
   const bidStartDiff = Number(auction.bidStartBlock) - Number(blockNumber);
-
-  // Fetch the items to display on the current page.
-  const queryResult = useQuery(GET_AUCTION_UNSETTLED_BIDS_COUNT, {
-    variables: {
-      address: auction.address,
-      name: auction.name
-    },
-  });
-  useQueryPollingWhileWindowFocused({
-    pollInterval: 1000,
-    ...queryResult,
-  });
 
   const settling: boolean = Boolean(queryResult.data?.auctionByAddressAndName?.bidsByAuctionAddressAndAuctionName?.totalCount);
 
