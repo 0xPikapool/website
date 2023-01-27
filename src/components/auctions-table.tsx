@@ -110,25 +110,25 @@ export default function AuctionsTable(props: {
             );
             return (
               <tr key={id} className="tracking-tighter">
-                <td className="hover:scale-125">{auction.chainId}</td>
+                <td>{auction.chainId}</td>
                 {props.showName ? (
-                  <td className="hover:scale-110">
+                  <td>
                     {<Link to={`/explorer?auction=${id}`}>{auction.name}</Link>}
                   </td>
                 ) : null}
-                <td className="hover:scale-110">
+                <td>
                   {
                     <Link href={etherscanUrl} target="_blank">
                       {truncatedAddress}
                     </Link>
                   }
                 </td>
-                <td className="hover:scale-125">{auction.maxUnits}</td>
-                <td className="hover:scale-125">{displayEth(auction.price)}</td>
-                <td className="hover:scale-125">{auction.bidStartBlock}</td>
-                <td className="hover:scale-125">{auction.mintStartBlock}</td>
-                <td className="hover:scale-125">{auction.bidsByAuctionAddressAndAuctionName.totalCount}</td>
-                <td className="hover:scale-125">{getAuctionStatus(auction, blockNumbers)}</td>
+                <td>{auction.maxUnits}</td>
+                <td>{displayEth(auction.price)}</td>
+                <td>{auction.bidStartBlock}</td>
+                <td>{auction.mintStartBlock}</td>
+                <td>{auction.bidsByAuctionAddressAndAuctionName.totalCount}</td>
+                <td>{getAuctionStatus(auction, blockNumbers)}</td>
               </tr>
             );
           })}
