@@ -8,6 +8,7 @@
 .docusaurus
 .cache-loader
 src/__generated__
+static/cryptopikachus/**/**
 
 # Misc
 .DS_Store
