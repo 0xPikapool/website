@@ -10,7 +10,7 @@ import {
 import useBlockNumbers from "../hooks/useBlockNumbers";
 import { useQuery } from "@apollo/client";
 import { GET_AUCTION_UNSETTLED_BIDS_COUNT } from "../queries";
-import { useQueryPollingWhileWindowFocused } from "@site/src/hooks/useQueryPollingWhileWindowFocused";
+import { useQueryPollingWhileWindowFocused } from "../hooks/useQueryPollingWhileWindowFocused";
 
 export interface BlockNumbers {
   1: { data: number | undefined; isLoading: boolean; error: Error | null };
@@ -80,10 +80,10 @@ export default function AuctionsTable(props: {
   const blockNumbers = useBlockNumbers();
 
   return (
-    <>
-      <table>
-        <thead>
-          <tr>
+    <div className="flex justify-center w-full">
+      <table className="table-auto overflow-x-auto text-[12px] sm:text-xs lg:text-sm xl:text-base 2xl:text-lg">
+        <thead className="table-header-group">
+          <tr className="table-row">
             <th>Chain ID</th>
             {props.showName ? <th>Name</th> : null}
             <th>Contract</th>
@@ -109,7 +109,7 @@ export default function AuctionsTable(props: {
               "address"
             );
             return (
-              <tr key={id}>
+              <tr key={id} className="tracking-tighter">
                 <td>{auction.chainId}</td>
                 {props.showName ? (
                   <td>
@@ -134,6 +134,6 @@ export default function AuctionsTable(props: {
           })}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }

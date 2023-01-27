@@ -17,24 +17,23 @@ function HomepageHeader() {
   });
   return (
     <header
-      style={{ display: "flex", flexWrap: "wrap", gap: "32px" }}
-      className={clsx("hero hero--primary", styles.heroBanner)}
+      className={clsx("bg-primary flex flex-wrap gap-10 xl:gap-1", "hero hero--primary", styles.heroBanner)}
     >
-      <div className="container" style={{ width: "auto" }}>
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
+      <div className="container w-auto space-y-10">
+        <h1 className="hero__title text-5xl font-medium xl:text-7xl">{siteConfig.title}</h1>
+        <p className="hero__subtitle text-2xl">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <ShakeSlow fixed={shake} fixedStop={true} freez={false}>
-            <Link className="button button--secondary button--lg" to="/docs">
+            <Link className="button button--secondary button--lg bg-secondary text-white" to="/docs">
               {"<<catch 'em all>>"}
             </Link>
           </ShakeSlow>
         </div>
       </div>
-      <div className="container" style={{ width: "auto" }}>
+      <div className="container w-auto max-w-md">
         <img
           src={"/img/pikapool.jpg"}
-          style={{ width: "440px", objectFit: "cover" }}
+          className="object-cover w-440 rounded-xl shadow-2xl max-w-md"
         />
       </div>
     </header>
