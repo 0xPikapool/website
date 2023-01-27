@@ -30,7 +30,7 @@ function HomepageHeader() {
           </ShakeSlow>
         </div>
       </div>
-      <div className="container w-auto max-w-md xl:mr-44">
+      <div className="container w-auto max-w-md">
         <img
           src={"/img/pikapool.jpg"}
           className="object-cover w-440 rounded-xl shadow-2xl"
