@@ -17,10 +17,10 @@ function HomepageHeader() {
   });
   return (
     <header
-      className={clsx("bg-primary flex flex-wrap gap-10 xl:gap-1", "hero hero--primary", styles.heroBanner)}
+      className={clsx("bg-primary flex flex-wrap gap-10", "hero hero--primary", styles.heroBanner)}
     >
-      <div className="container w-auto space-y-10">
-        <h1 className="hero__title text-5xl font-medium xl:text-7xl">{siteConfig.title}</h1>
+      <div className="container w-auto space-y-10 xl:ml-44">
+        <h1 className="hero__title text-5xl font-semibold xl:text-7xl">{siteConfig.title}</h1>
         <p className="hero__subtitle text-2xl">{siteConfig.tagline}</p>
         <div className={styles.buttons}>
           <ShakeSlow fixed={shake} fixedStop={true} freez={false}>
