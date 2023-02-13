@@ -19,7 +19,7 @@ export default function BidsTable(props: {
             <th>ID</th>
             <th>Signer</th>
             <th>Submitted</th>
-            <th>⚡ Tip ⚡</th>
+            <th className="whitespace-nowrap">⚡ Tip ⚡</th>
             <th>Amount</th>
             <th>Status</th>
           </tr>

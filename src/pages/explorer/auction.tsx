@@ -169,7 +169,7 @@ function PaginatedAuctionBids({
         >
           <div className="hero__subtitle">{`Latest Bids`}</div>
           {
-            checkRevealed && (
+           (
               <div
                 style={{
                   position: "absolute",
@@ -182,7 +182,8 @@ function PaginatedAuctionBids({
                   onChange={(e) => setOrderBy(e.target.value as BidsOrderBy)}
                 >
                   <option value={BidsOrderBy.SubmittedTimestampDesc}>Submitted Timestamp</option>
-                  <option value={BidsOrderBy.StatusDesc}>Tip</option>
+                  <option value={BidsOrderBy.TipHiddenDesc}>Tip</option>
+                  <option value={BidsOrderBy.StatusAsc}>Status</option>
                 </select>
               </div>
             )
