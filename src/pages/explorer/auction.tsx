@@ -183,7 +183,7 @@ function PaginatedAuctionBids({
                 >
                   <option value={BidsOrderBy.SubmittedTimestampDesc}>Submitted Timestamp</option>
                   <option value={BidsOrderBy.TipHiddenDesc}>Tip</option>
-                  <option value={BidsOrderBy.StatusAsc}>Status</option>
+                  <option value={BidsOrderBy.StatusDesc}>Status</option>
                 </select>
               </div>
             )

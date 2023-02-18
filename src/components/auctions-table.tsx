@@ -68,9 +68,12 @@ function getAuctionStatus(
   } else if (bidStartDiff <= 0 && settling) {
     return <>Settling...</>;
   } else if (bidStartDiff <= 0 && !settling) {
-    return <>Completed</>;
+    if (auction.bidsByAuctionAddressAndAuctionName.totalCount == 0) {
+      return <>Open</>;
+    } else { 
+      return <>Completed</>;
+    }
   }
-  return <>Open</>;
 }
 
 export default function AuctionsTable(props: {
