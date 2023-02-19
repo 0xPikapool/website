@@ -25,7 +25,7 @@ function getAuctionStatus(
   const queryResult = useQuery(GET_AUCTION_UNSETTLED_BIDS_COUNT, {
     variables: {
       address: auction.address,
-      name: auction.name
+      name: auction.name,
     },
   });
   useQueryPollingWhileWindowFocused({
@@ -45,17 +45,18 @@ function getAuctionStatus(
   }
 
   const blockNumber = blockNumbers[auction.chainId].data;
-  const bidStartDiff = Number(auction.bidStartBlock) - Number(blockNumber);
+  const blocksUntilBidOpen =
+    Number(auction.bidStartBlock) - Number(blockNumber);
 
-  const settling: boolean = Boolean(queryResult.data?.auctionByAddressAndName?.bidsByAuctionAddressAndAuctionName?.totalCount);
-
-  if (Number(auction.bidStartBlock) > Number(blockNumber)) {
+  // Bidding not open yet
+  if (blocksUntilBidOpen > 0) {
     return (
       <div style={{ display: "flex", flexDirection: "column" }}>
         <span>
-          Starting in {bidStartDiff} block{bidStartDiff > 1 ? "s..." : ""}
+          Starting in {blocksUntilBidOpen} block
+          {blocksUntilBidOpen > 1 ? "s..." : ""}
         </span>
-        {bidStartDiff === 1 && (
+        {blocksUntilBidOpen === 1 && (
           <div style={{ height: "auto", width: "8rem" }}>
             <img
               src="/img/auction_about_to_start_pikachu.gif"
@@ -65,15 +66,20 @@ function getAuctionStatus(
         )}
       </div>
     );
-  } else if (bidStartDiff <= 0 && settling) {
-    return <>Settling...</>;
-  } else if (bidStartDiff <= 0 && !settling) {
-    if (auction.bidsByAuctionAddressAndAuctionName.totalCount == 0) {
-      return <>Open</>;
-    } else { 
-      return <>Completed</>;
-    }
   }
+
+  // Bidding closed
+  const biddingClosed = Number(blockNumber) >= Number(auction.mintStartBlock);
+  if (biddingClosed) {
+    const settling: boolean =
+      queryResult.data?.auctionByAddressAndName
+        ?.bidsByAuctionAddressAndAuctionName?.totalCount > 0;
+    if (settling) return <>Settling...</>;
+    return <>Completed</>;
+  }
+
+  // Bidding open
+  return <>Open</>;
 }
 
 export default function AuctionsTable(props: {
