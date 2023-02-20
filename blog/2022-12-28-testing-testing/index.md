@@ -1,7 +1,7 @@
 ---
 slug: testing
 title: Testing, testing
-authors: [ash, braixen, crasher, khepri]
+authors: [ash, arceus, crasher, viola]
 tags: [testing, nft, mempool]
 ---
 
@@ -15,4 +15,4 @@ Powerered by bleeding edge meta-transactions and bundles.
 
 Stay tuned.
 
-![Pikapool Lake](./lake.png)
+![Pikapool Lake](./lake.jpg)

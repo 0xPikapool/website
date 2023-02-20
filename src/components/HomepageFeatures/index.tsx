@@ -12,14 +12,14 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: "bleeding edge",
-    imgSrc: "/img/nft_mempool.png",
+    imgSrc: "/img/nft_mempool.jpg",
     description: (
       <>The mempool built for NFT’s... a shocking development for the space.</>
     ),
   },
   {
     title: "mev centric",
-    imgSrc: "/img/polka_sniper.png",
+    imgSrc: "/img/polka_sniper.jpg",
     description: (
       <>
         Currently built for snipers (pew pew) but building for NFT projects
@@ -29,7 +29,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: "solving real problems",
-    imgSrc: "/img/pika_bills.png",
+    imgSrc: "/img/pika_bills.jpg",
     description: (
       <>
         You built the hype, you get the auction proceeds! Can I hear a bid from
@@ -41,13 +41,13 @@ const FeatureList: FeatureItem[] = [
 
 function Feature({ title, imgSrc, description }: FeatureItem) {
   return (
-    <div className={clsx("col col--4")}>
-      <div className="text--center">
-        <img className={styles.featureSvg} role="img" src={imgSrc} />
+    <div className={clsx("col col-4")}>
+      <div className="text-center rounded-2xl">
+        <img className={clsx(styles.featureSvg, "rounded-2xl")} role="img" src={imgSrc} />
       </div>
-      <div className="text--center padding-horiz--md">
-        <h3>{title}</h3>
-        <p>{description}</p>
+      <div className="text-center px-4 py-2">
+        <h3 className="text-xl font-medium">{title}</h3>
+        <p className="text-base">{description}</p>
       </div>
     </div>
   );

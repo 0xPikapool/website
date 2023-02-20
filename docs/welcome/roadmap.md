@@ -3,7 +3,7 @@
 Pikapool's main goal is to increase revenue for NFT projects and minimize negative externalities associated with NFT mints on the Ethereum network. In order to provide a sustainable auction service, our architecture will need to evolve over time. At first our v1 APIs will be centralized and require trust assumptions on our servers. But eventually we hope to enable anyone to run their own auction house in a permissionless and trustless way for both creators and minters. Viva La NFT!
 
 
-![roadmap](/img/roadmap.png)
+![roadmap](/img/roadmap.jpg)
 
 
 ## Pikapool Evolution Timeline

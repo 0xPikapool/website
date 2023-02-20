@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/pikapool-sm.png',
+  favicon: 'img/pikapool-sm.jpg',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -61,14 +61,15 @@ const config = {
         disableSwitch: false,
         respectPrefersColorScheme: false,
       },
-      image: 'img/pikapool.png',
+      image: 'img/pikapool.jpg',
       navbar: {
         title: 'Pikapool',
         logo: {
           alt: 'Pikapool',
-          src: 'img/pikapool.png',
+          src: 'img/pikapool.jpg',
         },
         items: [
+          { to: '/explorer', label: 'Explorer (Alpha)', position: 'left' },
           {
             type: 'doc',
             docId: 'index',
@@ -89,6 +90,20 @@ const config = {
         additionalLanguages: ['solidity'],
       },
     }),
+
+    plugins:    [
+      async function myPlugin(context, options) {
+        return {
+          name: "docusaurus-tailwindcss",
+          configurePostCss(postcssOptions) {
+            // Appends TailwindCSS and AutoPrefixer.
+            postcssOptions.plugins.push(require("tailwindcss"));
+            postcssOptions.plugins.push(require("autoprefixer"));
+            return postcssOptions;
+          },
+        };
+      },
+    ],
 };
 
 module.exports = config;

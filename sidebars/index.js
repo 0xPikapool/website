@@ -45,10 +45,10 @@ module.exports = {
         {
           type: 'doc',
           id: 'pokedex/kpr',
-        },{
+        }, {
           type: 'doc',
           id: 'pokedex/otherdeed',
-        },{
+        }, {
           type: 'doc',
           id: 'pokedex/vaynersports-pass',
         },
@@ -97,20 +97,40 @@ module.exports = {
           id: 'builders/overview',
         },
         {
-          type: 'doc',
-          id: 'builders/grant-minter-role',
+          type: 'category',
+          label: 'Smart contracts',
+          items: [
+            {
+              type: 'doc',
+              id: 'builders/smart-contracts/Settlement',
+            },
+            {
+              type: 'doc',
+              id: 'builders/smart-contracts/BidSignatures',
+            },
+            {
+              type: 'doc',
+              id: 'builders/smart-contracts/Example721A',
+            },{
+              type: 'doc',
+              id: 'builders/smart-contracts/Pikapatible',
+            }
+          ]
         },
         {
-          type: 'doc',
-          id: 'builders/typescript-sdk',
+          type: 'link',
+          label: 'TypeScript SDK',
+          href: 'https://github.com/0xPikapool/typescript-sdk',
         },
         {
-          type: 'doc',
-          id: 'builders/react-demo',
+          type: 'link',
+          label: 'React Demo',
+          href: 'https://github.com/0xPikapool/react-demo',
         },
         {
-          type: 'doc',
-          id: 'builders/rpc',
+          type: 'link',
+          label: 'Smart Contracts',
+          href: 'https://github.com/0xPikapool/contracts',
         },
       ],
     },

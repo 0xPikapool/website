@@ -5,7 +5,7 @@ description: A breakdown of the VaynerSports Pass Mint
 # VaynerSports Pass
 
 <centered style={{ display: "flex", justifyContent: "center", width: "100%"}}>
-  <img src="/img/pokedex-vayner.png" style={{maxWidth: "300px"}} />
+  <img src="/img/pokedex-vayner.jpg" style={{maxWidth: "300px"}} />
 </centered>
 
 ## Background
@@ -27,4 +27,7 @@ The VSP Mint was an entirely open mint
 | 15,000      | 4,717        | 0.4 ETH                  | 106         | 2,516       | 192.6 ETH                |
 
 #### Average Gas Price per Block Surrounding the Mint
-![VSP Surrounding](/img/pokedex/vsp/vsp_surrounding.png)
+![VSP Surrounding](/img/pokedex/vsp/vsp_surrounding.jpg)
+
+#### Average Gas Price - Mint Blocks Removed
+![VSP Surrounding](/img/pokedex/vsp/vsp_removed.jpg)

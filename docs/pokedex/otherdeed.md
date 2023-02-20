@@ -5,7 +5,7 @@ description: A breakdown of the Otherdeed Mint
 # Otherdeed
 
 <centered style={{ display: "flex", justifyContent: "center", width: "100%"}}>
-  <img src="/img/pokedex-otherdeed.png" style={{maxWidth: "300px"}} />
+  <img src="/img/pokedex-otherdeed.jpg" style={{maxWidth: "300px"}} />
 </centered>
 
 ## Background
@@ -27,7 +27,10 @@ The Otherdeed Mint had 3 parts, a Contributor Mint, BAYC & MAYC Holder Mint, and
 | 55,000      | 28,399       | 1.095 ETH                | 721         | 14,228      | 1,615.4 ETH              |
 
 #### Average Gas Price per Block Surrounding the Mint
-![Otherdeed Surrounding](/img/pokedex/otherdeed/otherdeed_surrounding.png)
+![Otherdeed Surrounding](/img/pokedex/otherdeed/otherdeed_surrounding.jpg)
+
+#### Average Gas Price per Block - Mint Blocks Removed
+![Otherdeed Removed](/img/pokedex/otherdeed/otherdeed_removed.jpg)
 
 ### BAYC & MAYC Holders
 | NFTs Minted | Participants | Average Gas Cost per NFT | Block Range | Failed TX's | Gas Spent on Failed TX's |
