@@ -56,13 +56,13 @@ module.exports = {
     },
     {
       type: 'doc',
-      label: 'Mint Pokedex',
-      id: 'pokedex',
+      label: 'Pikapool Auctions',
+      id: 'auctions',
     },
     {
       type: 'doc',
-      label: 'Pikapool Auctions',
-      id: 'auctions',
+      label: 'Demo',
+      id: 'demo',
     },
     {
       type: 'category',
