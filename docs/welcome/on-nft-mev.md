@@ -23,7 +23,6 @@ It's certainly possible to mitigate negative bidding experiences from solely the
 There are many other cool auction designs to experiment with at the smart contract level, including dutch auctions, [descending clearing-price auctions](https://a16zcrypto.com/nft-sales-market-clearing-gas-wars-auction-mechanism-design-for-builders/), [sealed-bid Vickrey auction](https://a16zcrypto.com/hidden-in-plain-sight-a-sneaky-solidity-implementation-of-a-sealed-bid-auction/). But to quote one of the most infamous designs around auction designs from one of the largest auctions of all time, ["So actually, fuck doing a Dutch auction"](https://mirror.xyz/0x3ae401F245034dAe25af1e2f9b9Bb8F006b1Dc6e/ErZMh-0TTwMrAKPJ1hlDcjvNfZvQ998G-B-oTS6BVQk). Which drives home one of the core tenets of pikapool, **NFT projects shouldn't need an auction expert to design their auction**.
 
 ### EIP 1559
-
 EIP-1559 solved many congestion related problems in ethereum in a very elegant manner, acting as something like a dynamic reserve price. But in times very large congestion, the mechanism still reverts back a first price auction. This ["emergency back-up first price auction"](https://youtu.be/a9SB3uXR1qw?t=1604) is where the entirety of state contention in NFTs lives. 
 
 ![roadmap](/img/eip1559.jpg)

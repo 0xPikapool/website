@@ -60,6 +60,11 @@ module.exports = {
       id: 'auctions',
     },
     {
+      type: 'doc',
+      label: 'Demo',
+      id: 'demo',
+    },
+    {
       type: 'category',
       label: 'For artists',
       items: [
